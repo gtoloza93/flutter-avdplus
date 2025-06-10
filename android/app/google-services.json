@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "43231268777",
+    "project_id": "advplus-774ba",
+    "storage_bucket": "advplus-774ba.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:43231268777:android:e95029700c6d5e7c847eb8",
+        "android_client_info": {
+          "package_name": "com.advplus.advplus"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCAATS5djNtMUiZZu-rfVHs7Nf8cqKfToc"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
