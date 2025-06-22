@@ -1,9 +1,40 @@
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:advplus/widgets/customtextfield.dart';
+import 'package:google_sign_in/google_sign_in.dart';
 
 class LoginScreen extends StatelessWidget {
   const LoginScreen({super.key});
+
+  // Agrega este método para el login con Google
+  Future<void> _signInWithGoogle(BuildContext context) async {
+    try {
+      final GoogleSignInAccount? googleUser = await GoogleSignIn().signIn();
+      if (googleUser == null) return;
+
+      final GoogleSignInAuthentication googleAuth =
+          await googleUser.authentication;
+      final credential = GoogleAuthProvider.credential(
+        accessToken: googleAuth.accessToken,
+        idToken: googleAuth.idToken,
+      );
+
+      await FirebaseAuth.instance.signInWithCredential(credential);
+
+      if (context.mounted) {
+        Navigator.pushReplacementNamed(context, '/home');
+      }
+    } catch (e) {
+      if (context.mounted) {
+        ScaffoldMessenger.of(context).showSnackBar(
+          const SnackBar(
+            content: Text("Error al iniciar con Google"),
+            backgroundColor: Colors.red,
+          ),
+        );
+      }
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -100,7 +131,9 @@ class LoginScreen extends StatelessWidget {
                         } catch (e) {
                           ScaffoldMessenger.of(context).showSnackBar(
                             SnackBar(
-                              content: Text("Error al iniciar sesión : Contraseña o email erroneo"),
+                              content: Text(
+                                "Error al iniciar sesión : Contraseña o email erroneo",
+                              ),
                               backgroundColor: Colors.red,
                             ),
                           );
@@ -127,7 +160,38 @@ class LoginScreen extends StatelessWidget {
                       ),
                     ),
                   ),
-
+                  const SizedBox(height: 5),
+                  Align(
+                    alignment: Alignment.center,
+                    child: OutlinedButton(
+                      onPressed: () => _signInWithGoogle(context),
+                      style: OutlinedButton.styleFrom(
+                        backgroundColor: Colors.amber[700],
+                        padding: const EdgeInsets.symmetric(
+                          horizontal: 68,
+                          vertical: 5,
+                        ),
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(10),
+                        ),
+                      ),
+                      child: Row(
+                        mainAxisSize: MainAxisSize.min,
+                        children: [
+                          const SizedBox(width: 10),
+                          Text(
+                            'INICIAR CON GOOGLE',
+                            style: TextStyle(
+                              color: const Color.fromARGB(255, 163, 61, 25),
+                              fontFamily: 'Fredoka',
+                              fontSize: 18,
+                              fontWeight: FontWeight.bold,
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                  ),
                   Align(
                     alignment: Alignment.center,
                     child: TextButton(

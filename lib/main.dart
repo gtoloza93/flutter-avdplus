@@ -1,3 +1,4 @@
+import 'package:advplus/widgets/edithabitwidget.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:advplus/screens/welcome-screen.dart';
@@ -10,9 +11,11 @@ import 'firebase_options.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
+
   await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
   );
+
   runApp(MyApp());
 }
 
@@ -30,7 +33,7 @@ class MyApp extends StatelessWidget {
           bodyMedium: TextStyle(fontFamily: 'Fredoka'),
         ),
       ),
-      initialRoute: '/welcome',
+      initialRoute: '/welcome', // O '/login' si prefieres
       onGenerateRoute: (settings) {
         switch (settings.name) {
           case '/':
@@ -49,7 +52,11 @@ class MyApp extends StatelessWidget {
           case '/addhabit':
             return MaterialPageRoute(builder: (_) => AddHabitScreen());
 
-        
+          
+          case '/edithabit':
+            return MaterialPageRoute(builder: (_) => EditHabitWidget(habit: {},));
+
+
           default:
             return null;
         }

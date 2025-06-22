@@ -8,7 +8,7 @@ class RewardDisplay extends StatelessWidget {
   const RewardDisplay({
     super.key,
     required this.frequency,
-    required this.difficulty,
+    required this.difficulty, required int xp,
   });
 
   int calculateXP(String frequency, String difficulty) {
@@ -41,13 +41,13 @@ class RewardDisplay extends StatelessWidget {
               ? 2
               : 3;
 
-      return (200 * pow(nivel, 1.5) + 100).toInt();
+      return (200 * pow(nivel, 1.5).toDouble() + 100).toInt();
     }
   }
 
   @override
   Widget build(BuildContext context) {
-    final xp = calculateXP(frequency, difficulty);
+    final int xp = calculateXP(frequency, difficulty);
 
     return Container(
       padding: EdgeInsets.symmetric(horizontal: 16, vertical: 20),

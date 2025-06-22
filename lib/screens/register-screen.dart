@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:advplus/widgets/customtextfield.dart';
+import 'package:google_sign_in/google_sign_in.dart';
 
 class RegisterScreen extends StatefulWidget {
   const RegisterScreen({super.key});
@@ -20,6 +21,60 @@ class _RegisterScreenState extends State<RegisterScreen> {
 
   bool _isLoading = false;
   String? _errorMessage;
+
+  Future<void> _signInWithGoogle() async {
+    try {
+      setState(() {
+        _isLoading = true;
+        _errorMessage = null;
+      });
+
+      final GoogleSignInAccount? googleUser = await GoogleSignIn().signIn();
+      if (googleUser == null) return;
+
+      final GoogleSignInAuthentication googleAuth =
+          await googleUser.authentication;
+      final credential = GoogleAuthProvider.credential(
+        accessToken: googleAuth.accessToken,
+        idToken: googleAuth.idToken,
+      );
+
+      // Registro en Firebase
+      final UserCredential userCredential = await FirebaseAuth.instance
+          .signInWithCredential(credential);
+
+      // Guardar datos en Firestore
+      if (userCredential.user != null) {
+        await FirebaseFirestore.instance
+            .collection('users')
+            .doc(userCredential.user!.uid)
+            .set({
+              'username': googleUser.displayName ?? 'Usuario Google',
+              'email': googleUser.email,
+              'createdAt': FieldValue.serverTimestamp(),
+              'xpTotal': 0,
+              'level': 1,
+              'coins': 0,
+              'habits': [],
+              'isGoogleUser': true, // Para identificar usuarios de Google
+            }, SetOptions(merge: true));
+      }
+
+      if (mounted) {
+        Navigator.pushReplacementNamed(context, '/home');
+      }
+    } catch (e) {
+      setState(() {
+        _errorMessage = 'Error al registrar con Google';
+      });
+    } finally {
+      if (mounted) {
+        setState(() {
+          _isLoading = false;
+        });
+      }
+    }
+  }
 
   Future<void> _registerUser() async {
     if (!_formKey.currentState!.validate()) return;
@@ -53,6 +108,10 @@ class _RegisterScreenState extends State<RegisterScreen> {
             'username': _usernameController.text.trim(),
             'email': _emailController.text.trim(),
             'createdAt': FieldValue.serverTimestamp(),
+            'xpTotal': 0, // ✅ Agregamos este campo
+            'level': 1, // ✅ Y este también
+            'coins': 0, // ✅ Y las monedas
+            'habits': [],
           });
 
       // ✅ Navegación a LoginScreen - Cambio importante aquí
@@ -280,8 +339,38 @@ class _RegisterScreenState extends State<RegisterScreen> {
                       ),
                     ),
 
-                    const SizedBox(height: 7),
+                    const SizedBox(height: 2),
 
+                    Align(
+                      alignment: Alignment.center,
+                      child: OutlinedButton(
+                        onPressed: _isLoading ? null : _signInWithGoogle,
+                        style: OutlinedButton.styleFrom(
+                          backgroundColor: Colors.amber[700],
+                          padding: const EdgeInsets.symmetric(
+                            horizontal: 53,
+                            vertical: 5,
+                          ),
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(10),
+                          ),
+                        ),
+                        child: Row(
+                          mainAxisSize: MainAxisSize.min,
+                          children: [
+                            Text(
+                              'REGISTRARSE CON GOOGLE',
+                              style: TextStyle(
+                                color: const Color.fromARGB(255, 163, 61, 25),
+                                fontFamily: 'Fredoka',
+                                fontSize: 16,
+                                fontWeight: FontWeight.bold,
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
+                    ),
                     // Botón para ir a Login
                     Align(
                       alignment: Alignment.center,
@@ -299,7 +388,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                         ),
                       ),
                     ),
-                    SizedBox(height: 180),
+                    SizedBox(height: 150),
                     // Pie de página
                     Align(
                       alignment: Alignment.center,

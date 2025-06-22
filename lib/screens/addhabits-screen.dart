@@ -5,6 +5,7 @@ import 'package:advplus/widgets/rewarddisplay.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 
+
 class AddHabitScreen extends StatefulWidget {
   const AddHabitScreen({super.key});
 
@@ -22,52 +23,52 @@ class _AddHabitScreenState extends State<AddHabitScreen> {
   bool _reminder = false;
   String _difficulty = 'DIFÍCIL';
 
-  int calculateXP(String frequency, String difficulty) {
-    if (_frequency == 'DIARIO') {
-      switch (difficulty) {
-        case 'FÁCIL':
-          return 15;
-        case 'INTERMEDIO':
-          return 35;
-        case 'DIFÍCIL':
-          return 70;
-        default:
-          return 0;
-      }
-    } else if (_frequency == 'SEMANAL') {
-      switch (difficulty) {
-        case 'FÁCIL':
-          return 90;
-        case 'INTERMEDIO':
-          return 180;
-        case 'DIFÍCIL':
-          return 360;
-        default:
-          return 0;
-      }
-    } else {
-      double nivel =
-          difficulty == 'FÁCIL'
-              ? 1
-              : difficulty == 'INTERMEDIO'
-              ? 2
-              : 3;
-
-      return (200 * pow(nivel, 1.5).toDouble() + 100).toInt();
+ int calculateXP(String frequency, String difficulty) {
+  if (frequency == 'DIARIO') {
+    switch (difficulty) {
+      case 'FÁCIL':
+        return 15;
+      case 'INTERMEDIO':
+        return 35;
+      case 'DIFÍCIL':
+        return 70;
+      default:
+        return 0;
     }
+  } else if (frequency == 'SEMANAL') {
+    switch (difficulty) {
+      case 'FÁCIL':
+        return 90;
+      case 'INTERMEDIO':
+        return 180;
+      case 'DIFÍCIL':
+        return 360;
+      default:
+        return 0;
+    }
+  } else {
+    double nivel = difficulty == 'FÁCIL' ? 1 : difficulty == 'INTERMEDIO' ? 2 : 3;
+    return (200 * pow(nivel, 1.5).toDouble() + 100).toInt();
+  }
+}
+
+  String _formatTime(TimeOfDay time) {
+    final hour = time.hour.toString().padLeft(2, '0');
+    final minute = time.minute.toString().padLeft(2, '0');
+    return "$hour:$minute";
   }
 
   void _mostrarCalendario() async {
-  final DateTime? picked = await showDatePicker(
-    context: context,
-    initialDate: DateTime.now(),
-    firstDate: DateTime(2000),
-    lastDate: DateTime(2100),
-  );
-  if (picked != null) {
-    // Aquí puedes manejar la fecha seleccionada
+    final DateTime? picked = await showDatePicker(
+      context: context,
+      initialDate: DateTime.now(),
+      firstDate: DateTime(2000),
+      lastDate: DateTime(2100),
+    );
+    if (picked != null) {
+      // Aquí puedes manejar la fecha seleccionada
+    }
   }
-}
 
   @override
   Widget build(BuildContext context) {
@@ -113,9 +114,8 @@ class _AddHabitScreenState extends State<AddHabitScreen> {
                       borderRadius: BorderRadius.circular(12),
                     ),
                     child: Row(
-                      mainAxisAlignment:
-                          MainAxisAlignment.spaceBetween,
-                               // Para separar los elementos
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      // Para separar los elementos
                       children: [
                         // Parte izquierda (Botón de retroceso y título)
                         Row(
@@ -796,7 +796,7 @@ class _AddHabitScreenState extends State<AddHabitScreen> {
                 // 👇 Recompensa esperada - Fuera del contenedor gris
                 SizedBox(height: 0),
 
-                RewardDisplay(frequency: _frequency, difficulty: _difficulty),
+                RewardDisplay(frequency: _frequency, difficulty: _difficulty, xp: xpToShow,),
 
                 SizedBox(height: 25),
 
@@ -806,9 +806,33 @@ class _AddHabitScreenState extends State<AddHabitScreen> {
                   child: ElevatedButton(
                     onPressed: () {
                       if (_formKey.currentState!.validate()) {
+                        final habitData = {
+                          'name': _habitNameController.text.trim(),
+                          'frequency': _frequency,
+                          'difficulty': _difficulty,
+                          'startTime': _formatTime(_startTime),
+                          'startDate': _startDate,
+                          'endDate': _endDate,
+                          'reminder': _reminder,
+                          'xp': xpToShow,
+                          'completed': false,
+                          'createdAt': FieldValue.serverTimestamp(),
+                        };
+
+                        final user = FirebaseAuth.instance.currentUser;
+                        if (user != null) {
+                          FirebaseFirestore.instance
+                              .collection('users')
+                              .doc(user.uid)
+                              .collection('habits')
+                              .add(habitData);
+
+                          // 👇 Programa la notificación si está activada
+                        }
+
                         ScaffoldMessenger.of(context).showSnackBar(
                           SnackBar(
-                            content: Text("Guardando hábito..."),
+                            content: Text("Hábito guardado con éxito"),
                             backgroundColor: Colors.green[800],
                             duration: Duration(seconds: 2),
                             behavior: SnackBarBehavior.floating,
@@ -818,36 +842,18 @@ class _AddHabitScreenState extends State<AddHabitScreen> {
                           ),
                         );
 
-                        final user = FirebaseAuth.instance.currentUser;
-                        if (user != null) {
-                          FirebaseFirestore.instance
-                              .collection('users')
-                              .doc(user.uid)
-                              .collection('habits')
-                              .add({
-                                'name': _habitNameController.text.trim(),
-                                'frequency': _frequency,
-                                'difficulty': _difficulty,
-                                'startTime': _startTime.format(context),
-                                'startDate': _startDate?.toString() ?? '',
-                                'endDate': _endDate?.toString() ?? '',
-                                'reminder': _reminder,
-                                'completed': false,
-                                'xp': xpToShow,
-                                'createdAt': FieldValue.serverTimestamp(),
-                              });
-                        }
-
                         Future.delayed(Duration(seconds: 2), () {
                           Navigator.pop(context);
                         });
                       }
                     },
-
                     style: ElevatedButton.styleFrom(
-                      backgroundColor: Color.fromARGB(223, 2, 2, 2),
+                      backgroundColor: const Color.fromARGB(223, 2, 2, 2),
                       foregroundColor: Colors.amber,
-                      padding: EdgeInsets.symmetric(horizontal: 8, vertical: 5),
+                      padding: EdgeInsets.symmetric(
+                        horizontal: 40,
+                        vertical: 15,
+                      ),
                       shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(10),
                       ),
@@ -855,14 +861,17 @@ class _AddHabitScreenState extends State<AddHabitScreen> {
                     child: Row(
                       mainAxisSize: MainAxisSize.min,
                       children: [
-                        Image.asset('assets/icons/save.png'),
+                        Image.asset(
+                          'assets/icons/save.png',
+                          width: 34,
+                          height: 34,
+                        ),
                         SizedBox(width: 10),
                         Text(
                           "Guardar",
                           style: TextStyle(
-                            color: Colors.amber,
-                            fontSize: 18,
                             fontFamily: 'Fredoka',
+                            fontSize: 18,
                             fontWeight: FontWeight.bold,
                           ),
                         ),
@@ -870,8 +879,7 @@ class _AddHabitScreenState extends State<AddHabitScreen> {
                     ),
                   ),
                 ),
-
-                SizedBox(height: 240),
+                SizedBox(height: 220),
               ],
             ),
           ),

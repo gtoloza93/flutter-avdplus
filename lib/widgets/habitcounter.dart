@@ -52,14 +52,12 @@ class HabitCounter extends StatelessWidget {
 
         final habitDocs = snapshot.data!.docs;
 
-        final today = DateTime.now();
-        final completedToday = habitDocs.where((doc) {
-          final data = doc.data() as Map<String, dynamic>;
-          final lastCompleted = (data['lastCompleted'] as Timestamp?)?.toDate();
-          return data['completed'] == true &&
-              lastCompleted != null &&
-              isSameDay(lastCompleted, today);
-        }).length;
+        final thisToday = habitDocs
+            .map((doc) => doc.data() as Map<String, dynamic>)
+            .toList();
+
+        final completedToday = thisToday.where((h) => h['completed']).length;
+
 
         return Row(
           children: [
@@ -77,7 +75,7 @@ class HabitCounter extends StatelessWidget {
             Container(
               padding: EdgeInsets.symmetric(horizontal: 6, vertical: 3),
               decoration: BoxDecoration(
-                color: Colors.amber.withOpacity(0.2),
+                color: const Color.fromARGB(115, 0, 0, 0),
                 borderRadius: BorderRadius.circular(6),
               ),
               child: Text(

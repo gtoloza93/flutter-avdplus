@@ -35,7 +35,7 @@ class HabitCounterSem extends StatelessWidget {
               Container(
                 padding: EdgeInsets.symmetric(horizontal: 6, vertical: 3),
                 decoration: BoxDecoration(
-                  color: Colors.amber.withOpacity(0.2),
+                  color: const Color.fromARGB(185, 0, 0, 0),
                   borderRadius: BorderRadius.circular(6),
                 ),
                 child: Text(
@@ -74,7 +74,7 @@ class HabitCounterSem extends StatelessWidget {
             Container(
               padding: EdgeInsets.symmetric(horizontal: 6, vertical: 3),
               decoration: BoxDecoration(
-                color: Colors.amber.withOpacity(0.2),
+                color: const Color.fromARGB(120, 0, 0, 0),
                 borderRadius: BorderRadius.circular(6),
               ),
               child: Text(

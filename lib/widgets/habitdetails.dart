@@ -1,6 +1,8 @@
+import 'package:advplus/widgets/edithabitwidget.dart';
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:intl/intl.dart';
 
 class HabitDetailsScreen extends StatelessWidget {
   final Map<String, dynamic> habit;
@@ -17,6 +19,27 @@ class HabitDetailsScreen extends StatelessWidget {
     if (picked != null) {
       // Aquí puedes manejar la fecha seleccionada
     }
+  }
+
+  String _formatDate(dynamic date) {
+    if (date == null) return "No definida";
+
+    if (date is Timestamp) {
+      final DateTime dateTime = date.toDate();
+      return DateFormat('dd/MM/yyyy').format(dateTime);
+    } else if (date is DateTime) {
+      return DateFormat('dd/MM/yyyy').format(date);
+    } else if (date is String) {
+      // Si es una cadena con formato de fecha
+      try {
+        final parsedDate = DateTime.tryParse(date);
+        if (parsedDate != null) {
+          return DateFormat('dd/MM/yyyy').format(parsedDate);
+        }
+      } catch (e) {}
+    }
+
+    return "----";
   }
 
   Future<bool?> showDeleteDialog(BuildContext context) {
@@ -301,9 +324,7 @@ class HabitDetailsScreen extends StatelessWidget {
                           ),
                           Spacer(),
                           Text(
-                            habit['startDate'] != null
-                                ? habit['startDate'].toString().split(' ').first
-                                : "No definida",
+                            _formatDate(habit['startDate']),
                             style: TextStyle(
                               color: Colors.white,
                               fontFamily: 'Fredoka',
@@ -340,9 +361,7 @@ class HabitDetailsScreen extends StatelessWidget {
                           ),
                           Spacer(),
                           Text(
-                            habit['endDate'] != null
-                                ? habit['endDate'].toString().split(' ').first
-                                : "Indefinido",
+                            _formatDate(habit['endDate']),
                             style: TextStyle(
                               color: Colors.white,
                               fontFamily: 'Fredoka',
@@ -527,10 +546,12 @@ class HabitDetailsScreen extends StatelessWidget {
                           ),
                           onPressed: () {
                             // Navegar a AddHabitScreen con los datos del hábito para editar
-                            Navigator.pushNamed(
+                            Navigator.push(
                               context,
-                              '/addhabit',
-                              arguments: {'habit': habit},
+                              MaterialPageRoute(
+                                builder:
+                                    (context) => EditHabitWidget(habit: habit),
+                              ),
                             );
                           },
                           child: Row(

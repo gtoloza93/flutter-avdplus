@@ -1,3 +1,4 @@
+import 'package:advplus/widgets/profilewidget.dart';
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -55,6 +56,8 @@ class _HabitsScreenState extends State<HabitsScreen> {
                 case 'Incompletos':
                   count = incompletedCount;
                   break;
+                default:
+                  count = 0;
               }
 
               return Padding(
@@ -99,7 +102,7 @@ class _HabitsScreenState extends State<HabitsScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.transparent,
+      
       body: Container(
         decoration: BoxDecoration(
           image: DecorationImage(
@@ -108,10 +111,12 @@ class _HabitsScreenState extends State<HabitsScreen> {
           ),
         ),
         child: Padding(
-          padding: const EdgeInsets.all(5.0),
+          padding: const EdgeInsets.all(0.0),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
+              ProfileWidget(),
+              SizedBox(height: 5),
               // 👇 Sección con icono + texto
               Container(
                 padding: EdgeInsets.symmetric(vertical: 15, horizontal: 10),
@@ -132,7 +137,7 @@ class _HabitsScreenState extends State<HabitsScreen> {
                       "Mis Hábitos :",
                       style: TextStyle(
                         color: Colors.amber,
-                        fontSize: 22,
+                        fontSize: 18,
                         fontWeight: FontWeight.bold,
                         fontFamily: 'Fredoka',
                       ),
@@ -179,18 +184,11 @@ class _HabitsScreenState extends State<HabitsScreen> {
                     switch (_filter) {
                       case 'Activos':
                         filteredHabits =
-                            habitDocs
-                                .map((doc) {
-                                  final data =
-                                      doc.data() as Map<String, dynamic>;
-                                  data['id'] = doc.id;
-                                  return data;
-                                })
-                                .where((h) {
-                                  final habit = h as Map<String, dynamic>;
-                                  return habit['completed'] != true;
-                                })
-                                .toList();
+                            habitDocs.map((doc) {
+                              final data = doc.data() as Map<String, dynamic>;
+                              data['id'] = doc.id;
+                              return data;
+                            }).toList();
                         break;
 
                       case 'Completados':
@@ -202,10 +200,7 @@ class _HabitsScreenState extends State<HabitsScreen> {
                                   data['id'] = doc.id;
                                   return data;
                                 })
-                                .where((h) {
-                                  final habit = h as Map<String, dynamic>;
-                                  return habit['completed'] == true;
-                                })
+                                .where((h) => h['completed'] == true)
                                 .toList();
                         break;
 
@@ -218,59 +213,9 @@ class _HabitsScreenState extends State<HabitsScreen> {
                                   data['id'] = doc.id;
                                   return data;
                                 })
-                                .where((h) {
-                                  final habit = h as Map<String, dynamic>;
-
-                                  final frequency = habit['frequency'] ?? '';
-                                  final startDate =
-                                      (habit['startDate'] as String?)
-                                          ?.split(' ')
-                                          .first; // Fecha de inicio
-                                  final endDate =
-                                      (habit['endDate'] as String?)
-                                          ?.split(' ')
-                                          .first; // Fecha de fin
-
-                                  final habitDate =
-                                      habit['lastCompleted'] is Timestamp
-                                          ? (habit['lastCompleted']
-                                                  as Timestamp)
-                                              .toDate()
-                                          : habit['lastCompleted'] is DateTime
-                                          ? habit['lastCompleted']
-                                          : null;
-
-                                  final today = DateTime.now();
-                                  final habitDateIsToday =
-                                      habitDate != null &&
-                                      habitDate.year == today.year &&
-                                      habitDate.month == today.month &&
-                                      habitDate.day == today.day;
-
-                                  // Si el hábito NO es diario o semanal, lo ignoramos por ahora
-                                  if (frequency != 'DIARIO' &&
-                                      frequency != 'SEMANAL') {
-                                    return false;
-                                  }
-
-                                  // Para DIARIO: si no está completado HOY → incompleto
-                                  if (frequency == 'DIARIO' &&
-                                      habit['completed'] == false &&
-                                      habitDateIsToday != true) {
-                                    return true;
-                                  }
-
-                                  // Para SEMANAL: si no se ha completado esta semana
-                                  if (frequency == 'SEMANAL' &&
-                                      habit['completed'] == false) {
-                                    return true;
-                                  }
-
-                                  return false;
-                                })
+                                .where((h) => h['completed'] != true)
                                 .toList();
                         break;
-
                       default:
                         filteredHabits =
                             habitDocs.map((doc) {
@@ -298,7 +243,7 @@ class _HabitsScreenState extends State<HabitsScreen> {
                 ),
               ),
 
-              SizedBox(height: 0),
+              SizedBox(height: 16),
 
               // 👇 Botón para añadir nuevo hábito
               Align(
@@ -308,7 +253,7 @@ class _HabitsScreenState extends State<HabitsScreen> {
                     Navigator.pushNamed(context, '/addhabit');
                   },
                   child: Container(
-                    padding: EdgeInsets.symmetric(vertical: 10, horizontal: 100),
+                    padding: EdgeInsets.symmetric(vertical: 10, horizontal: 30),
                     decoration: BoxDecoration(
                       color: const Color.fromARGB(214, 3, 3, 3),
                       borderRadius: BorderRadius.circular(12),
@@ -340,7 +285,7 @@ class _HabitsScreenState extends State<HabitsScreen> {
                   ),
                 ),
               ),
-              SizedBox(height: 140),
+              SizedBox(height: 60),
             ],
           ),
         ),

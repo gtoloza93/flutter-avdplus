@@ -4,7 +4,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 
 class CustomProgressBar extends StatelessWidget {
   const CustomProgressBar({
-    super.key,
+    super.key, required double progress,
   });
 
   @override
@@ -96,7 +96,7 @@ class CustomProgressBar extends StatelessWidget {
             ],
           ),
 
-          SizedBox(height: 16),
+          SizedBox(height: 10),
 
           LayoutBuilder(
             builder: (context, constraints) {
@@ -108,7 +108,7 @@ class CustomProgressBar extends StatelessWidget {
                   Image.asset(
                     'assets/images/probarback.png',
                     width: barWidth,
-                    height:50,
+                    height:60,
                     fit: BoxFit.fitWidth,
                   ),
 
@@ -118,7 +118,7 @@ class CustomProgressBar extends StatelessWidget {
                     child: Image.asset(
                       'assets/images/progressfill.png',
                       width: barWidth,
-                      height: 50,
+                      height: 60,
                       fit: BoxFit.fitWidth,
                     ),
                   ),
