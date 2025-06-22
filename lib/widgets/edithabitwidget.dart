@@ -159,14 +159,19 @@ class _EditHabitWidgetState extends State<EditHabitWidget> {
         backgroundColor: Colors.amber[700],
         duration: Duration(seconds: 2),
         behavior: SnackBarBehavior.floating,
-        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(10),
+        ),
       ),
     );
+
+    
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      
       body: Container(
         width: double.infinity,
         height: double.infinity,
@@ -214,15 +219,12 @@ class _EditHabitWidgetState extends State<EditHabitWidget> {
                     color: Colors.grey[500],
                     fontFamily: 'Fredoka',
                   ),
-                  contentPadding: EdgeInsets.symmetric(
-                    horizontal: 10,
-                    vertical: 12,
-                  ),
+                  contentPadding: EdgeInsets.symmetric(horizontal: 10, vertical: 12),
                 ),
               ),
-
+        
               SizedBox(height: 16),
-
+        
               // Frecuencia
               Text(
                 "Frecuencia",
@@ -233,44 +235,36 @@ class _EditHabitWidgetState extends State<EditHabitWidget> {
               ),
               SizedBox(height: 8),
               Row(
-                children:
-                    ['DIARIO', 'SEMANAL'].map((freq) {
-                      return Expanded(
-                        child: GestureDetector(
-                          onTap: () => setState(() => _frequency = freq),
-                          child: Container(
-                            margin: EdgeInsets.only(right: 10),
-                            padding: EdgeInsets.symmetric(
-                              vertical: 12,
-                              horizontal: 16,
-                            ),
-                            decoration: BoxDecoration(
-                              color:
-                                  _frequency == freq
-                                      ? Colors.amber.withOpacity(0.2)
-                                      : Colors.grey[800],
-                              borderRadius: BorderRadius.circular(10),
-                            ),
-                            child: Center(
-                              child: Text(
-                                freq,
-                                style: TextStyle(
-                                  color:
-                                      _frequency == freq
-                                          ? Colors.amber
-                                          : Colors.white,
-                                  fontFamily: 'Fredoka',
-                                ),
-                              ),
+                children: ['DIARIO', 'SEMANAL'].map((freq) {
+                  return Expanded(
+                    child: GestureDetector(
+                      onTap: () => setState(() => _frequency = freq),
+                      child: Container(
+                        margin: EdgeInsets.only(right: 10),
+                        padding: EdgeInsets.symmetric(vertical: 12, horizontal: 16),
+                        decoration: BoxDecoration(
+                          color: _frequency == freq
+                              ? Colors.amber.withOpacity(0.2)
+                              : Colors.grey[800],
+                          borderRadius: BorderRadius.circular(10),
+                        ),
+                        child: Center(
+                          child: Text(
+                            freq,
+                            style: TextStyle(
+                              color: _frequency == freq ? Colors.amber : Colors.white,
+                              fontFamily: 'Fredoka',
                             ),
                           ),
                         ),
-                      );
-                    }).toList(),
+                      ),
+                    ),
+                  );
+                }).toList(),
               ),
-
+        
               SizedBox(height: 16),
-
+        
               // Dificultad
               Text(
                 "Dificultad",
@@ -281,44 +275,36 @@ class _EditHabitWidgetState extends State<EditHabitWidget> {
               ),
               SizedBox(height: 8),
               Row(
-                children:
-                    ['FÁCIL', 'INTERMEDIO', 'DIFÍCIL'].map((diff) {
-                      return Expanded(
-                        child: GestureDetector(
-                          onTap: () => setState(() => _difficulty = diff),
-                          child: Container(
-                            margin: EdgeInsets.only(right: 10),
-                            padding: EdgeInsets.symmetric(
-                              vertical: 12,
-                              horizontal: 16,
-                            ),
-                            decoration: BoxDecoration(
-                              color:
-                                  _difficulty == diff
-                                      ? Colors.amber.withOpacity(0.2)
-                                      : Colors.grey[800],
-                              borderRadius: BorderRadius.circular(10),
-                            ),
-                            child: Center(
-                              child: Text(
-                                diff,
-                                style: TextStyle(
-                                  color:
-                                      _difficulty == diff
-                                          ? Colors.amber
-                                          : Colors.white,
-                                  fontFamily: 'Fredoka',
-                                ),
-                              ),
+                children: ['FÁCIL', 'INTERMEDIO', 'DIFÍCIL'].map((diff) {
+                  return Expanded(
+                    child: GestureDetector(
+                      onTap: () => setState(() => _difficulty = diff),
+                      child: Container(
+                        margin: EdgeInsets.only(right: 10),
+                        padding: EdgeInsets.symmetric(vertical: 12, horizontal: 16),
+                        decoration: BoxDecoration(
+                          color: _difficulty == diff
+                              ? Colors.amber.withOpacity(0.2)
+                              : Colors.grey[800],
+                          borderRadius: BorderRadius.circular(10),
+                        ),
+                        child: Center(
+                          child: Text(
+                            diff,
+                            style: TextStyle(
+                              color: _difficulty == diff ? Colors.amber : Colors.white,
+                              fontFamily: 'Fredoka',
                             ),
                           ),
                         ),
-                      );
-                    }).toList(),
+                      ),
+                    ),
+                  );
+                }).toList(),
               ),
-
+        
               SizedBox(height: 16),
-
+        
               // Hora de inicio
               Text(
                 "Hora de Inicio",
@@ -340,19 +326,20 @@ class _EditHabitWidgetState extends State<EditHabitWidget> {
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
                       Text(
-                        "${_startTime.format(context)}",
+                        _startTime.format(context),
                         style: TextStyle(
                           color: Colors.white,
                           fontFamily: 'Fredoka',
                         ),
                       ),
+                     
                     ],
                   ),
                 ),
               ),
-
+        
               SizedBox(height: 16),
-
+        
               // Fecha de inicio
               Text(
                 "Fecha de Inicio",
@@ -378,20 +365,18 @@ class _EditHabitWidgetState extends State<EditHabitWidget> {
                             ? DateFormat('dd/MM/yyyy').format(_startDate!)
                             : "Selecciona fecha",
                         style: TextStyle(
-                          color:
-                              _startDate != null
-                                  ? Colors.white
-                                  : Colors.grey[500],
+                          color: _startDate != null ? Colors.white : Colors.grey[500],
                           fontFamily: 'Fredoka',
                         ),
                       ),
+                     
                     ],
                   ),
                 ),
               ),
-
+        
               SizedBox(height: 16),
-
+        
               // Fecha de fin
               Text(
                 "Fecha de Fin",
@@ -417,29 +402,27 @@ class _EditHabitWidgetState extends State<EditHabitWidget> {
                             ? DateFormat('dd/MM/yyyy').format(_endDate!)
                             : "Selecciona fecha",
                         style: TextStyle(
-                          color:
-                              _endDate != null
-                                  ? Colors.white
-                                  : Colors.grey[500],
+                          color: _endDate != null ? Colors.white : Colors.grey[500],
                           fontFamily: 'Fredoka',
                         ),
                       ),
+                     
                     ],
                   ),
                 ),
               ),
-
+        
               SizedBox(height: 24),
-
+        
               // Muestra la recompensa dinámica
               RewardDisplay(
                 frequency: _frequency,
                 difficulty: _difficulty,
                 xp: xpToShow,
               ),
-
+        
               SizedBox(height: 24),
-
+        
               // Botón para guardar
               ElevatedButton(
                 style: ElevatedButton.styleFrom(
@@ -454,7 +437,11 @@ class _EditHabitWidgetState extends State<EditHabitWidget> {
                 child: Row(
                   mainAxisSize: MainAxisSize.min,
                   children: [
-                    Image.asset('assets/icons/edit.png', width: 24, height: 24),
+                    Image.asset(
+                      'assets/icons/edit.png',
+                      width: 24,
+                      height: 24,
+                    ),
                     SizedBox(width: 10),
                     Text(
                       "Guardar Cambios",
