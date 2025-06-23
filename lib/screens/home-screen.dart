@@ -36,13 +36,7 @@ class _HomeScreenState extends State<HomeScreen> {
   String? _quote;
   late Timer _timer;
 
-  TimeOfDay? _parseTimeString(String timeString) {
-    if (timeString.isEmpty || !timeString.contains(':')) return null;
-    final parts = timeString.split(':');
-    int hour = int.tryParse(parts[0]) ?? 0;
-    int minute = int.tryParse(parts[1]) ?? 0;
-    return TimeOfDay(hour: hour, minute: minute);
-  }
+ 
 
   int _currentIndex = 0;
 

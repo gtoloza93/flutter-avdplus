@@ -141,15 +141,15 @@ class CustomProgressDia extends StatelessWidget {
                   Image.asset(
                     'assets/images/probarback.png',
                     width: barWidth,
-                    height: 50,
+                    height: 65,
                     fit: BoxFit.fitWidth,
                   ),
                   ClipRect(
                     clipper: ProgressRectClipper(progress: progress),
                     child: Image.asset(
-                      'assets/images/progressfills.png',
+                      'assets/images/progressfill.png',
                       width:barWidth,
-                      height: 50,
+                      height: 55,
                       fit: BoxFit.fitWidth,
                     ),
                   ),
@@ -196,7 +196,7 @@ class CustomProgressDia extends StatelessWidget {
               ),
               Expanded(
                 child: Padding(
-                  padding: EdgeInsets.only(left: 90),
+                  padding: EdgeInsets.only(left: 100),
                   child: DailyHabitCounter(), // Muestra cuántos hábitos completaste hoy
                 ),
               ),

@@ -125,7 +125,7 @@ class CustomProgressBar extends StatelessWidget {
                   Image.asset(
                     'assets/images/probarback.png',
                     width: barWidth,
-                    height: 50,
+                    height: 65,
                     fit: BoxFit.fitWidth,
                   ),
 
@@ -135,7 +135,7 @@ class CustomProgressBar extends StatelessWidget {
                     child: Image.asset(
                       'assets/images/progressfill.png',
                       width: barWidth,
-                      height: 50,
+                      height: 56,
                       fit: BoxFit.fitWidth,
                     ),
                   ),

@@ -206,15 +206,15 @@ class _LevelProgressWidgetState extends State<LevelProgressWidget> {
                   Image.asset(
                     'assets/images/probarback.png',
                     width: double.infinity,
-                    height: 50,
+                    height: 65,
                     fit: BoxFit.fitWidth,
                   ),
                   ClipRect(
                     clipper: ProgressRectClipper(progress: progress),
                     child: Image.asset(
-                      'assets/images/progressfill.png',
+                      'assets/images/progressfilll.png',
                       width: double.infinity,
-                      height: 50,
+                      height: 56,
                       fit: BoxFit.fitWidth,
                     ),
                   ),

@@ -1,4 +1,4 @@
-import 'package:advplus/widgets/DailyHabitCounter.dart';
+
 import 'package:advplus/widgets/WeeklyHabitCounter.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
@@ -142,7 +142,7 @@ class CustomProgressSem extends StatelessWidget {
                   Image.asset(
                     'assets/images/probarback.png',
                     width: barWidth,
-                    height: 50,
+                    height: 65,
                     fit: BoxFit.fitWidth,
                   ),
                   ClipRect(
@@ -150,7 +150,7 @@ class CustomProgressSem extends StatelessWidget {
                     child: Image.asset(
                       'assets/images/progressfilln.png',
                       width:barWidth,
-                      height: 50,
+                      height: 55,
                       fit: BoxFit.fitWidth,
                     ),
                   ),
