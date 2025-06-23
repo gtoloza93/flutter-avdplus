@@ -22,16 +22,13 @@ class DailyHabitCounter extends StatelessWidget {
           return const Text('0/0');
         }
 
-        final habitDocs = snapshot.data!.docs;
-        final today = DateTime.now();
-        
-        final completedToday = habitDocs.where((doc) {
-          final data = doc.data() as Map<String, dynamic>;
-          final lastCompleted = (data['lastCompleted'] as Timestamp?)?.toDate();
-          return data['completed'] == true &&
-              lastCompleted != null &&
-              isSameDay(lastCompleted, today);
-        }).length;
+         final habitDocs = snapshot.data!.docs;
+
+        final thisToday = habitDocs
+            .map((doc) => doc.data() as Map<String, dynamic>)
+            .toList();
+
+        final completedToday = thisToday.where((h) => h['completed']).length;
 
         return Text(
           '$completedToday/${habitDocs.length}',

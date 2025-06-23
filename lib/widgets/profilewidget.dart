@@ -12,7 +12,7 @@ class ProfileWidget extends StatefulWidget {
 
 class _ProfileWidgetState extends State<ProfileWidget> {
   String? _username;
-  final int _xpTotal = 0;
+
   int _level = 1;
   int _coins = 0; // Inicializamos en 0 por defecto
 

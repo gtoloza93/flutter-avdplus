@@ -1,16 +1,15 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:firebase_auth/firebase_auth.dart';
+
 
 class CustomProgressBar extends StatelessWidget {
-  const CustomProgressBar({
-    super.key, required double progress,
-  });
+  const CustomProgressBar({super.key});
 
   @override
   Widget build(BuildContext context) {
     final user = FirebaseAuth.instance.currentUser;
-    if (user == null) return SizedBox();
+    if (user == null) return Container();
 
     return StreamBuilder<QuerySnapshot>(
       stream: FirebaseFirestore.instance
@@ -26,24 +25,46 @@ class CustomProgressBar extends StatelessWidget {
 
         final habitDocs = snapshot.data!.docs;
 
-        final today = DateTime.now();
-        final completedToday = habitDocs.map((doc) => doc.data() as Map<String, dynamic>).where((habit) {
-          final lastCompleted = (habit['lastCompleted'] as Timestamp?)?.toDate();
-          return habit['completed'] == true &&
-              lastCompleted != null &&
-              isSameDay(lastCompleted, today);
-        }).length;
+        final now = DateTime.now();
+        final todayStart = DateTime(now.year, now.month, now.day);
+        
 
-        final totalHabits = habitDocs.length;
-        final progress = totalHabits == 0 ? 0.0 : completedToday / totalHabits;
+        int completedToday = 0;
+        int totalDailyHabits = habitDocs.length;
 
+        for (var doc in habitDocs) {
+          final habit = doc.data() as Map<String, dynamic>;
+          final completed = habit['completed'] is bool ? habit['completed'] : false;
+          final lastCompleted = _parseTimestamp(habit['lastCompleted']);
+
+          if (completed && lastCompleted != null) {
+            if (lastCompleted.isAfter(todayStart) 
+               ) {
+              completedToday++;
+            }
+          }
+        }
+
+        double progress =
+            totalDailyHabits == 0 ? 0.0 : completedToday / totalDailyHabits;
+
+       
         return _buildProgressContainer(progress);
       },
     );
   }
 
+  static DateTime? _parseTimestamp(dynamic timestamp) {
+    if (timestamp is Timestamp) {
+      return timestamp.toDate();
+    } else if (timestamp is DateTime) {
+      return timestamp;
+    }
+    return null;
+  }
+
   Widget _buildProgressContainer(double progress) {
-    final percent = (progress * 100).toInt(); // Progreso en porcentaje
+    final percent = (progress * 100).toInt();
 
     return Container(
       width: double.infinity,
@@ -60,32 +81,30 @@ class CustomProgressBar extends StatelessWidget {
             textAlign: TextAlign.center,
             maxLines: 1,
             overflow: TextOverflow.ellipsis,
-            style: TextStyle(
+            style: const TextStyle(
               color: Colors.white,
               fontSize: 14,
               fontWeight: FontWeight.w500,
               fontFamily: 'Fredoka',
             ),
           ),
-
-          SizedBox(height: 10),
-
+          const SizedBox(height: 10),
           Row(
             children: [
-              SizedBox(width: 10),
+              const SizedBox(width: 10),
               Image.asset(
                 'assets/icons/progreso.png',
-                width: 25,
-                height: 25,
+                width: 24,
+                height: 24,
                 fit: BoxFit.fitWidth,
               ),
-              SizedBox(width: 15),
+              const SizedBox(width: 15),
               Expanded(
                 child: Text(
-                  'Tu Progreso hoy : $percent%',
+                  'Tu Progreso Hoy : $percent%',
                   maxLines: 1,
                   overflow: TextOverflow.ellipsis,
-                  style: TextStyle(
+                  style: const TextStyle(
                     color: Colors.amber,
                     fontSize: 18,
                     fontWeight: FontWeight.w600,
@@ -95,9 +114,7 @@ class CustomProgressBar extends StatelessWidget {
               ),
             ],
           ),
-
-          SizedBox(height: 10),
-
+          const SizedBox(height: 10),
           LayoutBuilder(
             builder: (context, constraints) {
               final barWidth = constraints.maxWidth;
@@ -108,7 +125,7 @@ class CustomProgressBar extends StatelessWidget {
                   Image.asset(
                     'assets/images/probarback.png',
                     width: barWidth,
-                    height:60,
+                    height: 50,
                     fit: BoxFit.fitWidth,
                   ),
 
@@ -118,7 +135,7 @@ class CustomProgressBar extends StatelessWidget {
                     child: Image.asset(
                       'assets/images/progressfill.png',
                       width: barWidth,
-                      height: 60,
+                      height: 50,
                       fit: BoxFit.fitWidth,
                     ),
                   ),
@@ -130,17 +147,13 @@ class CustomProgressBar extends StatelessWidget {
       ),
     );
   }
-
-  bool isSameDay(DateTime date1, DateTime date2) {
-    return date1.year == date2.year && date1.month == date2.month && date1.day == date2.day;
-  }
 }
 
 // Clase auxiliar para recortar la barra de progreso
 class ProgressRectClipper extends CustomClipper<Rect> {
   final double progress;
 
-  ProgressRectClipper({required this.progress});
+  const ProgressRectClipper({required this.progress});
 
   @override
   Rect getClip(Size size) {

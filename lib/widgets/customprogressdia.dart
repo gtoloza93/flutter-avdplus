@@ -1,7 +1,7 @@
 import 'package:advplus/widgets/DailyHabitCounter.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 
 class CustomProgressDia extends StatelessWidget {
   const CustomProgressDia({super.key});
@@ -9,7 +9,7 @@ class CustomProgressDia extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final user = FirebaseAuth.instance.currentUser;
-    if (user == null) return SizedBox.shrink();
+    if (user == null) return const SizedBox.shrink();
 
     return StreamBuilder<QuerySnapshot>(
       stream:
@@ -21,57 +21,68 @@ class CustomProgressDia extends StatelessWidget {
               .snapshots(),
       builder: (context, snapshot) {
         if (!snapshot.hasData) {
-          return _buildProgressContainer(progress: 0.0, xpTotal: 0);
+          return _buildProgressContainer(0.0, xpTotal: 0);
         }
 
-        final habitDocs =
-            snapshot.data!.docs
-                .map((doc) => doc.data() as Map<String, dynamic>)
-                .toList();
-        final today = DateTime.now();
+        final habitDocs = snapshot.data!.docs;
+
+        final now = DateTime.now();
+        final todayStart = DateTime(now.year, now.month, now.day);
+
         int completedXp = 0;
+        int totalDailyXp = 0;
 
-        for (var habit in habitDocs) {
-          final lastCompleted =
-              (habit['lastCompleted'] as Timestamp?)?.toDate();
-          final xp = (habit['xp'] as int?) ?? 0;
+        for (var doc in habitDocs) {
+          final habit = doc.data() as Map<String, dynamic>;
 
-          if (habit['completed'] == true &&
+          // ✅ Validamos que `xp` sea `int`
+          int xp = 0;
+          if (habit.containsKey('xp')) {
+            final rawXp = habit['xp'];
+            if (rawXp is num) {
+              xp = rawXp.toInt();
+            } else if (rawXp is String) {
+              final parsed = int.tryParse(rawXp);
+              xp = parsed ?? 0;
+            } else if (rawXp is int) {
+              xp = rawXp;
+            }
+          }
+
+          final completed = habit['completed'] == true;
+          final lastCompleted = _parseTimestamp(habit['lastCompleted']);
+
+          totalDailyXp += xp;
+
+          if (completed &&
               lastCompleted != null &&
-              isSameDay(lastCompleted, today)) {
+              lastCompleted.isAfter(todayStart)) {
             completedXp += xp;
           }
         }
 
-        final totalXp = habitDocs.fold<int>(0, (sum, habit) {
-          final xp = (habit['xp'] as int?) ?? 0;
-          return sum + xp;
-        });
+        double progress = totalDailyXp == 0 ? 0.0 : completedXp / totalDailyXp;
 
-        final progress = totalXp == 0 ? 0.0 : completedXp / totalXp;
-
-        return _buildProgressContainer(
-          progress: progress,
-          xpTotal: completedXp,
-        );
+        return _buildProgressContainer(progress, xpTotal: completedXp);
       },
     );
   }
 
-  bool isSameDay(DateTime date1, DateTime date2) {
-    return date1.year == date2.year &&
-        date1.month == date2.month &&
-        date1.day == date2.day;
+  static DateTime? _parseTimestamp(dynamic timestamp) {
+    if (timestamp is Timestamp) {
+      return timestamp.toDate();
+    } else if (timestamp is DateTime) {
+      return timestamp;
+    }
+    return null;
   }
 
-  Widget _buildProgressContainer({
-    required double progress,
-    required int xpTotal,
-  }) {
-    final percent = (progress * 100).toInt();
+  Widget _buildProgressContainer(double progress, {required int xpTotal}) {
+    final percent = (progress * 100).toInt(); // Progreso en porcentaje
+
     return Container(
       width: double.infinity,
-      padding: EdgeInsets.symmetric(vertical: 8, horizontal: 0),
+      padding: EdgeInsets.symmetric(vertical: 10, horizontal: 0),
       margin: EdgeInsets.symmetric(horizontal: 0),
       decoration: BoxDecoration(
         color: const Color.fromARGB(204, 3, 3, 3),
@@ -91,7 +102,7 @@ class CustomProgressDia extends StatelessWidget {
               SizedBox(width: 15),
               Expanded(
                 child: Text(
-                  'Progreso de hoy',
+                  'Progreso de Hoy',
                   maxLines: 1,
                   overflow: TextOverflow.ellipsis,
                   style: TextStyle(
@@ -104,17 +115,13 @@ class CustomProgressDia extends StatelessWidget {
               ),
               Expanded(
                 child: Padding(
-                  padding: EdgeInsets.only(
-                    left: 110,
-                  ), // o right, horizontal, etc.
+                  padding: EdgeInsets.only(left: 90),
                   child: Text(
                     '$xpTotal XP',
-                    maxLines: 1,
-                    overflow: TextOverflow.ellipsis,
                     style: TextStyle(
-                      color: const Color.fromARGB(255, 255, 255, 255),
+                      color: Colors.white,
                       fontSize: 20,
-                      fontWeight: FontWeight.w600,
+                      fontWeight: FontWeight.bold,
                       fontFamily: 'Fredoka',
                     ),
                   ),
@@ -131,20 +138,17 @@ class CustomProgressDia extends StatelessWidget {
               return Stack(
                 alignment: Alignment.centerLeft,
                 children: [
-                  // Fondo vacío
                   Image.asset(
                     'assets/images/probarback.png',
-                    width: 350,
-                    height: 70,
+                    width: barWidth,
+                    height: 50,
                     fit: BoxFit.fitWidth,
                   ),
-
-                  // Barra llena naranja - clippeada dinámicamente
                   ClipRect(
                     clipper: ProgressRectClipper(progress: progress),
                     child: Image.asset(
-                      'assets/images/progressfilln.png',
-                      width: 350,
+                      'assets/images/progressfills.png',
+                      width:barWidth,
                       height: 50,
                       fit: BoxFit.fitWidth,
                     ),
@@ -155,6 +159,7 @@ class CustomProgressDia extends StatelessWidget {
           ),
 
           SizedBox(height: 10),
+
           Row(
             children: [
               SizedBox(width: 10),
@@ -165,35 +170,34 @@ class CustomProgressDia extends StatelessWidget {
                 fit: BoxFit.fitWidth,
               ),
               SizedBox(width: 15),
+              Text(
+                'Hoy :',
+                style: TextStyle(
+                  color: Colors.amber,
+                  fontSize: 18,
+                  fontWeight: FontWeight.w600,
+                  fontFamily: 'Fredoka',
+                ),
+              ),
               Expanded(
                 child: Row(
                   children: [
+                    SizedBox(width: 10),
                     Text(
-                      'Hoy :',
+                      '$percent% Completado',
                       style: TextStyle(
-                        color: Colors.amber,
-                        fontSize: 18,
+                        color: Colors.white,
+                        fontSize: 16,
                         fontWeight: FontWeight.w600,
-                        fontFamily: 'Fredoka',
                       ),
-                    ),
-                    SizedBox(width: 5), // Espacio entre textos
-                    Text(
-                      ' $percent% Completado',
-                      style: TextStyle(color: Colors.white, fontSize: 16, fontWeight: FontWeight.w600),
                     ),
                   ],
                 ),
               ),
-
-
-
               Expanded(
                 child: Padding(
-                  padding: EdgeInsets.only(
-                    left: 125,
-                  ), // o right, horizontal, etc.
-                  child: DailyHabitCounter(),
+                  padding: EdgeInsets.only(left: 90),
+                  child: DailyHabitCounter(), // Muestra cuántos hábitos completaste hoy
                 ),
               ),
             ],
@@ -208,7 +212,7 @@ class CustomProgressDia extends StatelessWidget {
 class ProgressRectClipper extends CustomClipper<Rect> {
   final double progress;
 
-  ProgressRectClipper({required this.progress});
+  const ProgressRectClipper({required this.progress});
 
   @override
   Rect getClip(Size size) {

@@ -8,7 +8,7 @@ class RewardDisplay extends StatelessWidget {
   const RewardDisplay({
     super.key,
     required this.frequency,
-    required this.difficulty, required int xp,
+    required this.difficulty, 
   });
 
   int calculateXP(String frequency, String difficulty) {

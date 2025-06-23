@@ -141,9 +141,10 @@ class HabitDetailsScreen extends StatelessWidget {
                               Text(
                                 "Hoy",
                                 style: TextStyle(
-                                  color: Colors.white,
+                                  color: Colors.amber,
                                   fontSize: 18,
                                   fontFamily: 'Fredoka',
+                                  fontWeight: FontWeight.w600,
                                 ),
                               ),
                               SizedBox(

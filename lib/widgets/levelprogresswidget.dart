@@ -251,7 +251,7 @@ class _LevelProgressWidgetState extends State<LevelProgressWidget> {
 
           Row(
             children: [
-              Image.asset('assets/icons/coin.png', width: 20, height: 20),
+              Image.asset('assets/icons/coin.png', width: 22, height: 22),
               SizedBox(width: 8),
               Text(
                 "$_coins Coins",

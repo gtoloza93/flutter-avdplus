@@ -796,7 +796,7 @@ class _AddHabitScreenState extends State<AddHabitScreen> {
                 // 👇 Recompensa esperada - Fuera del contenedor gris
                 SizedBox(height: 0),
 
-                RewardDisplay(frequency: _frequency, difficulty: _difficulty, xp: xpToShow,),
+                RewardDisplay(frequency: _frequency, difficulty: _difficulty,),
 
                 SizedBox(height: 25),
 

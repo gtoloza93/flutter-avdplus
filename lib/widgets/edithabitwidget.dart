@@ -159,19 +159,26 @@ class _EditHabitWidgetState extends State<EditHabitWidget> {
         backgroundColor: Colors.amber[700],
         duration: Duration(seconds: 2),
         behavior: SnackBarBehavior.floating,
-        shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(10),
-        ),
+        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
       ),
     );
+  }
 
-    
+  void _mostrarCalendario(BuildContext context) async {
+    final DateTime? picked = await showDatePicker(
+      context: context,
+      initialDate: DateTime.now(),
+      firstDate: DateTime(2000),
+      lastDate: DateTime(2100),
+    );
+    if (picked != null) {
+      // Aquí puedes manejar la fecha seleccionada
+    }
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      
       body: Container(
         width: double.infinity,
         height: double.infinity,
@@ -184,277 +191,504 @@ class _EditHabitWidgetState extends State<EditHabitWidget> {
           ),
         ),
         child: Padding(
-          padding: EdgeInsets.all(16.0),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              // Campo de nombre
-              Text(
-                "Nombre del Hábito",
-                style: TextStyle(
-                  color: Colors.grey[400],
-                  fontFamily: 'Fredoka',
-                  fontSize: 16,
-                ),
-              ),
-              SizedBox(height: 4),
-              TextFormField(
-                controller: _nameController,
-                validator: (value) {
-                  if (value?.trim().isEmpty ?? true) {
-                    return "El nombre no puede estar vacío";
-                  }
-                  return null;
-                },
-                style: TextStyle(color: Colors.white, fontFamily: 'Fredoka'),
-                decoration: InputDecoration(
-                  filled: true,
-                  fillColor: Color.fromARGB(255, 30, 30, 30),
-                  border: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(10),
-                    borderSide: BorderSide.none,
-                  ),
-                  hintText: "Ej: Tomar agua",
-                  hintStyle: TextStyle(
-                    color: Colors.grey[500],
-                    fontFamily: 'Fredoka',
-                  ),
-                  contentPadding: EdgeInsets.symmetric(horizontal: 10, vertical: 12),
-                ),
-              ),
-        
-              SizedBox(height: 16),
-        
-              // Frecuencia
-              Text(
-                "Frecuencia",
-                style: TextStyle(
-                  color: Colors.grey[400],
-                  fontFamily: 'Fredoka',
-                ),
-              ),
-              SizedBox(height: 8),
-              Row(
-                children: ['DIARIO', 'SEMANAL'].map((freq) {
-                  return Expanded(
-                    child: GestureDetector(
-                      onTap: () => setState(() => _frequency = freq),
-                      child: Container(
-                        margin: EdgeInsets.only(right: 10),
-                        padding: EdgeInsets.symmetric(vertical: 12, horizontal: 16),
-                        decoration: BoxDecoration(
-                          color: _frequency == freq
-                              ? Colors.amber.withOpacity(0.2)
-                              : Colors.grey[800],
-                          borderRadius: BorderRadius.circular(10),
-                        ),
-                        child: Center(
-                          child: Text(
-                            freq,
-                            style: TextStyle(
-                              color: _frequency == freq ? Colors.amber : Colors.white,
-                              fontFamily: 'Fredoka',
+          padding: const EdgeInsets.all(15.0),
+
+          child: SingleChildScrollView(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                SizedBox(height: 30),
+                Align(
+                  alignment: Alignment.center,
+                  child: Container(
+                    padding: EdgeInsets.symmetric(horizontal: 15, vertical: 10),
+                    margin: EdgeInsets.symmetric(vertical: 7),
+                    decoration: BoxDecoration(
+                      color: const Color.fromARGB(
+                        179,
+                        0,
+                        0,
+                        0,
+                      ), // Fondo gris transparente
+                      borderRadius: BorderRadius.circular(12),
+                    ),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      // Para separar los elementos
+                      children: [
+                        // Parte izquierda (Botón de retroceso y título)
+                        Row(
+                          children: [
+                            BackButton(),
+                            Text(
+                              "Editar Habito:",
+                              style: TextStyle(
+                                color: Colors.amber,
+                                fontSize: 20,
+                                fontFamily: 'Fredoka',
+                                fontWeight: FontWeight.w600,
+                              ),
                             ),
+                          ],
+                        ),
+
+                        // Parte derecha (Imagen con texto para calendario)
+                        GestureDetector(
+                          onTap: () {
+                            _mostrarCalendario(
+                              context,
+                            ); // Asegúrate de tener esta función implementada
+                          },
+                          child: Row(
+                            children: [
+                              Text(
+                                "Hoy",
+                                style: TextStyle(
+                                  color: Colors.amber,
+                                  fontSize: 18,
+                                  fontFamily: 'Fredoka',
+                                  fontWeight: FontWeight.w600,
+                                ),
+                              ),
+                              SizedBox(
+                                width: 8,
+                              ), // Espacio entre texto e imagen
+                              Image.asset(
+                                'assets/icons/calendario.png', // Asegúrate de tener esta imagen en tus assets
+                                width: 34,
+                                height: 34,
+                              ),
+                            ],
                           ),
                         ),
-                      ),
+                      ],
                     ),
-                  );
-                }).toList(),
-              ),
-        
-              SizedBox(height: 16),
-        
-              // Dificultad
-              Text(
-                "Dificultad",
-                style: TextStyle(
-                  color: Colors.grey[400],
-                  fontFamily: 'Fredoka',
+                  ),
                 ),
-              ),
-              SizedBox(height: 8),
-              Row(
-                children: ['FÁCIL', 'INTERMEDIO', 'DIFÍCIL'].map((diff) {
-                  return Expanded(
-                    child: GestureDetector(
-                      onTap: () => setState(() => _difficulty = diff),
-                      child: Container(
-                        margin: EdgeInsets.only(right: 10),
-                        padding: EdgeInsets.symmetric(vertical: 12, horizontal: 16),
-                        decoration: BoxDecoration(
-                          color: _difficulty == diff
-                              ? Colors.amber.withOpacity(0.2)
-                              : Colors.grey[800],
-                          borderRadius: BorderRadius.circular(10),
-                        ),
-                        child: Center(
-                          child: Text(
-                            diff,
-                            style: TextStyle(
-                              color: _difficulty == diff ? Colors.amber : Colors.white,
-                              fontFamily: 'Fredoka',
-                            ),
-                          ),
-                        ),
-                      ),
-                    ),
-                  );
-                }).toList(),
-              ),
-        
-              SizedBox(height: 16),
-        
-              // Hora de inicio
-              Text(
-                "Hora de Inicio",
-                style: TextStyle(
-                  color: Colors.grey[400],
-                  fontFamily: 'Fredoka',
-                ),
-              ),
-              SizedBox(height: 8),
-              GestureDetector(
-                onTap: () => _selectStartTime(context),
-                child: Container(
-                  padding: EdgeInsets.symmetric(vertical: 12, horizontal: 16),
+
+                Container(
+                  padding: EdgeInsets.all(10),
                   decoration: BoxDecoration(
-                    color: Color.fromARGB(255, 30, 30, 30),
-                    borderRadius: BorderRadius.circular(10),
+                    color: const Color.fromARGB(158, 0, 0, 0),
+                    borderRadius: BorderRadius.circular(12),
                   ),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      Text(
-                        _startTime.format(context),
+                      Row(
+                        children: [
+                          Radio(
+                            value: true,
+                            groupValue: true,
+                            onChanged: (_) {},
+                            activeColor: const Color.fromARGB(
+                              255,
+                              255,
+                              255,
+                              255,
+                            ),
+                          ),
+                          SizedBox(width: 5),
+                          // Campo de nombre
+                          Text(
+                            "Nombre del Hábito",
+                            style: TextStyle(
+                              color: Colors.amber,
+                              fontFamily: 'Fredoka',
+                              fontSize: 18,
+                            ),
+                          ),
+                        ],
+                      ),
+
+                      TextFormField(
+                        controller: _nameController,
+                        validator: (value) {
+                          if (value?.trim().isEmpty ?? true) {
+                            return "El nombre no puede estar vacío";
+                          }
+                          return null;
+                        },
                         style: TextStyle(
                           color: Colors.white,
                           fontFamily: 'Fredoka',
                         ),
-                      ),
-                     
-                    ],
-                  ),
-                ),
-              ),
-        
-              SizedBox(height: 16),
-        
-              // Fecha de inicio
-              Text(
-                "Fecha de Inicio",
-                style: TextStyle(
-                  color: Colors.grey[400],
-                  fontFamily: 'Fredoka',
-                ),
-              ),
-              SizedBox(height: 8),
-              GestureDetector(
-                onTap: () => _selectStartDate(context),
-                child: Container(
-                  padding: EdgeInsets.symmetric(vertical: 12, horizontal: 16),
-                  decoration: BoxDecoration(
-                    color: Color.fromARGB(255, 30, 30, 30),
-                    borderRadius: BorderRadius.circular(10),
-                  ),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      Text(
-                        _startDate != null
-                            ? DateFormat('dd/MM/yyyy').format(_startDate!)
-                            : "Selecciona fecha",
-                        style: TextStyle(
-                          color: _startDate != null ? Colors.white : Colors.grey[500],
-                          fontFamily: 'Fredoka',
+                        decoration: InputDecoration(
+                          filled: true,
+                          fillColor: Color.fromARGB(255, 30, 30, 30),
+                          border: OutlineInputBorder(
+                            borderRadius: BorderRadius.circular(10),
+                            borderSide: BorderSide.none,
+                          ),
+                          hintText: "Ej: Tomar agua",
+                          hintStyle: TextStyle(
+                            color: Colors.grey[500],
+                            fontFamily: 'Fredoka',
+                          ),
+                          contentPadding: EdgeInsets.symmetric(
+                            horizontal: 10,
+                            vertical: 12,
+                          ),
                         ),
                       ),
-                     
-                    ],
-                  ),
-                ),
-              ),
-        
-              SizedBox(height: 16),
-        
-              // Fecha de fin
-              Text(
-                "Fecha de Fin",
-                style: TextStyle(
-                  color: Colors.grey[400],
-                  fontFamily: 'Fredoka',
-                ),
-              ),
-              SizedBox(height: 8),
-              GestureDetector(
-                onTap: () => _selectEndDate(context),
-                child: Container(
-                  padding: EdgeInsets.symmetric(vertical: 12, horizontal: 16),
-                  decoration: BoxDecoration(
-                    color: Color.fromARGB(255, 30, 30, 30),
-                    borderRadius: BorderRadius.circular(10),
-                  ),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      Text(
-                        _endDate != null
-                            ? DateFormat('dd/MM/yyyy').format(_endDate!)
-                            : "Selecciona fecha",
-                        style: TextStyle(
-                          color: _endDate != null ? Colors.white : Colors.grey[500],
-                          fontFamily: 'Fredoka',
+
+                      //Frecuencia
+                      Row(
+                        children: [
+                          Radio(
+                            value: true,
+                            groupValue: true,
+                            onChanged: (_) {},
+                            activeColor: const Color.fromARGB(
+                              255,
+                              255,
+                              255,
+                              255,
+                            ),
+                          ),
+                          SizedBox(width: 2),
+                          // Campo de nombre
+                          Text(
+                            "Frecuencia",
+                            style: TextStyle(
+                              color: Colors.amber,
+                              fontFamily: 'Fredoka',
+                              fontSize: 18,
+                            ),
+                          ),
+                        ],
+                      ),
+
+                      Row(
+                        children:
+                            ['DIARIO', 'SEMANAL'].map((freq) {
+                              return Expanded(
+                                child: GestureDetector(
+                                  onTap:
+                                      () => setState(() => _frequency = freq),
+                                  child: Container(
+                                    margin: EdgeInsets.only(right: 10),
+                                    padding: EdgeInsets.symmetric(
+                                      vertical: 12,
+                                      horizontal: 16,
+                                    ),
+                                    decoration: BoxDecoration(
+                                      color:
+                                          _frequency == freq
+                                              ? Colors.amber.withOpacity(0.2)
+                                              : Colors.grey[800],
+                                      borderRadius: BorderRadius.circular(10),
+                                    ),
+                                    child: Center(
+                                      child: Text(
+                                        freq,
+                                        style: TextStyle(
+                                          color:
+                                              _frequency == freq
+                                                  ? Colors.amber
+                                                  : Colors.white,
+                                          fontFamily: 'Fredoka',
+                                        ),
+                                      ),
+                                    ),
+                                  ),
+                                ),
+                              );
+                            }).toList(),
+                      ),
+
+                      // Dificultad
+                      Row(
+                        children: [
+                          Radio(
+                            value: true,
+                            groupValue: true,
+                            onChanged: (_) {},
+                            activeColor: const Color.fromARGB(
+                              255,
+                              255,
+                              255,
+                              255,
+                            ),
+                          ),
+                          SizedBox(width: 5),
+                          // Campo de nombre
+                          Text(
+                            "Dificultad",
+                            style: TextStyle(
+                              color: Colors.amber,
+                              fontFamily: 'Fredoka',
+                              fontSize: 18,
+                            ),
+                          ),
+                        ],
+                      ),
+                      Row(
+                        children:
+                            ['FÁCIL', 'INTERMEDIO', 'DIFÍCIL'].map((diff) {
+                              return Expanded(
+                                child: GestureDetector(
+                                  onTap:
+                                      () => setState(() => _difficulty = diff),
+                                  child: Container(
+                                    margin: EdgeInsets.only(right: 10),
+                                    padding: EdgeInsets.symmetric(
+                                      vertical: 12,
+                                      horizontal: 16,
+                                    ),
+                                    decoration: BoxDecoration(
+                                      color:
+                                          _difficulty == diff
+                                              ? Colors.amber.withOpacity(0.2)
+                                              : Colors.grey[800],
+                                      borderRadius: BorderRadius.circular(10),
+                                    ),
+                                    child: Center(
+                                      child: Text(
+                                        diff,
+                                        style: TextStyle(
+                                          color:
+                                              _difficulty == diff
+                                                  ? Colors.amber
+                                                  : Colors.white,
+                                          fontFamily: 'Fredoka',
+                                        ),
+                                      ),
+                                    ),
+                                  ),
+                                ),
+                              );
+                            }).toList(),
+                      ),
+
+                      // Hora de inicio
+                      Row(
+                        children: [
+                          Radio(
+                            value: true,
+                            groupValue: true,
+                            onChanged: (_) {},
+                            activeColor: const Color.fromARGB(
+                              255,
+                              255,
+                              255,
+                              255,
+                            ),
+                          ),
+                          SizedBox(width: 5),
+                          // Campo de nombre
+                          Text(
+                            "Hora de Inicio",
+                            style: TextStyle(
+                              color: Colors.amber,
+                              fontFamily: 'Fredoka',
+                              fontSize: 18,
+                            ),
+                          ),
+                        ],
+                      ),
+
+                      GestureDetector(
+                        onTap: () => _selectStartTime(context),
+                        child: Container(
+                          padding: EdgeInsets.symmetric(
+                            vertical: 12,
+                            horizontal: 16,
+                          ),
+                          decoration: BoxDecoration(
+                            color: Color.fromARGB(255, 30, 30, 30),
+                            borderRadius: BorderRadius.circular(10),
+                          ),
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                              Text(
+                                _startTime.format(context),
+                                style: TextStyle(
+                                  color: Colors.white,
+                                  fontFamily: 'Fredoka',
+                                ),
+                              ),
+                            ],
+                          ),
                         ),
                       ),
-                     
+
+                      Row(
+                        children: [
+                          Radio(
+                            value: true,
+                            groupValue: true,
+                            onChanged: (_) {},
+                            activeColor: const Color.fromARGB(
+                              255,
+                              255,
+                              255,
+                              255,
+                            ),
+                          ),
+                          SizedBox(width: 5),
+                          // Campo de nombre
+                          Text(
+                            "Fecha de Inicio",
+                            style: TextStyle(
+                              color: Colors.amber,
+                              fontFamily: 'Fredoka',
+                              fontSize: 18,
+                            ),
+                          ),
+                        ],
+                      ),
+
+                      GestureDetector(
+                        onTap: () => _selectStartDate(context),
+                        child: Container(
+                          padding: EdgeInsets.symmetric(
+                            vertical: 12,
+                            horizontal: 16,
+                          ),
+                          decoration: BoxDecoration(
+                            color: Color.fromARGB(255, 30, 30, 30),
+                            borderRadius: BorderRadius.circular(10),
+                          ),
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                              Text(
+                                _startDate != null
+                                    ? DateFormat(
+                                      'dd/MM/yyyy',
+                                    ).format(_startDate!)
+                                    : "Selecciona fecha",
+                                style: TextStyle(
+                                  color:
+                                      _startDate != null
+                                          ? Colors.white
+                                          : Colors.grey[500],
+                                  fontFamily: 'Fredoka',
+                                ),
+                              ),
+                            ],
+                          ),
+                        ),
+                      ),
+
+                      // Fecha de fin
+                      Row(
+                        children: [
+                          Radio(
+                            value: true,
+                            groupValue: true,
+                            onChanged: (_) {},
+                            activeColor: const Color.fromARGB(
+                              255,
+                              255,
+                              255,
+                              255,
+                            ),
+                          ),
+                          SizedBox(width: 5),
+                          // Campo de nombre
+                          Text(
+                            "Fecha de fin",
+                            style: TextStyle(
+                              color: Colors.amber,
+                              fontFamily: 'Fredoka',
+                              fontSize: 18,
+                            ),
+                          ),
+                        ],
+                      ),
+
+                      GestureDetector(
+                        onTap: () => _selectEndDate(context),
+                        child: Container(
+                          padding: EdgeInsets.symmetric(
+                            vertical: 12,
+                            horizontal: 16,
+                          ),
+                          decoration: BoxDecoration(
+                            color: Color.fromARGB(255, 30, 30, 30),
+                            borderRadius: BorderRadius.circular(10),
+                          ),
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                              Text(
+                                _endDate != null
+                                    ? DateFormat('dd/MM/yyyy').format(_endDate!)
+                                    : "Selecciona fecha",
+                                style: TextStyle(
+                                  color:
+                                      _endDate != null
+                                          ? Colors.white
+                                          : Colors.grey[500],
+                                  fontFamily: 'Fredoka',
+                                ),
+                              ),
+                            ],
+                          ),
+                        ),
+                      ),
                     ],
                   ),
                 ),
-              ),
-        
-              SizedBox(height: 24),
-        
-              // Muestra la recompensa dinámica
-              RewardDisplay(
-                frequency: _frequency,
-                difficulty: _difficulty,
-                xp: xpToShow,
-              ),
-        
-              SizedBox(height: 24),
-        
-              // Botón para guardar
-              ElevatedButton(
-                style: ElevatedButton.styleFrom(
-                  backgroundColor: Colors.amber[700],
-                  foregroundColor: Colors.black,
-                  padding: EdgeInsets.symmetric(horizontal: 40, vertical: 15),
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(10),
+
+                SizedBox(height: 5),
+
+                // Muestra la recompensa dinámica
+                RewardDisplay(frequency: _frequency, difficulty: _difficulty),
+
+                SizedBox(height: 5),
+
+                // Botón para guardar
+                Align(
+                  alignment: Alignment.center,
+                  child: Container(
+                    padding: EdgeInsets.symmetric(horizontal: 10),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        ElevatedButton(
+                          style: ElevatedButton.styleFrom(
+                            backgroundColor: const Color.fromARGB(200, 0, 0, 0),
+                            foregroundColor: Colors.amber,
+                            padding: EdgeInsets.symmetric(
+                              horizontal: 20,
+                              vertical: 10,
+                            ),
+                            shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(10),
+                            ),
+                          ),
+                          onPressed: () => _saveHabitToFirebase(context),
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            mainAxisSize: MainAxisSize.min,
+                            children: [
+                              Image.asset(
+                                'assets/icons/save.png',
+                                width: 34,
+                                height: 34,
+                              ),
+                              SizedBox(width: 10),
+                              Text(
+                                "Guardar",
+                                style: TextStyle(
+                                  fontFamily: 'Fredoka',
+                                  fontSize: 18,
+                                  fontWeight: FontWeight.bold,
+                                ),
+                              ),
+                            ],
+                          ),
+                        ),
+                      ],
+                    ),
                   ),
                 ),
-                onPressed: () => _saveHabitToFirebase(context),
-                child: Row(
-                  mainAxisSize: MainAxisSize.min,
-                  children: [
-                    Image.asset(
-                      'assets/icons/edit.png',
-                      width: 24,
-                      height: 24,
-                    ),
-                    SizedBox(width: 10),
-                    Text(
-                      "Guardar Cambios",
-                      style: TextStyle(
-                        fontFamily: 'Fredoka',
-                        fontSize: 18,
-                        fontWeight: FontWeight.bold,
-                      ),
-                    ),
-                  ],
-                ),
-              ),
-            ],
+              ],
+            ),
           ),
         ),
       ),

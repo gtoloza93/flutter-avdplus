@@ -1,5 +1,6 @@
 import 'dart:math';
 
+import 'package:advplus/widgets/customprogressbar.dart';
 import 'package:advplus/widgets/habititem.dart';
 import 'package:advplus/widgets/notificationwidget.dart';
 import 'package:advplus/widgets/profilewidget.dart';
@@ -9,7 +10,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 
 import 'package:advplus/widgets/habitcounter.dart';
-import 'package:advplus/widgets/customprogressbar.dart';
+
 import 'package:advplus/widgets/habitlist.dart';
 import 'package:advplus/utils/localquoteprovider.dart';
 import 'package:advplus/widgets/motivationalquote.dart';
@@ -168,10 +169,10 @@ class _HomeScreenState extends State<HomeScreen> {
         ),
         SizedBox(height: 5),
 
-        CustomProgressBar(progress: 0),
+       CustomProgressBar(),
 
         SizedBox(height: 15),
-          HabitCounter(),
+        HabitCounter(),
         SizedBox(height: 10),
         Expanded(
           child: StreamBuilder<QuerySnapshot>(

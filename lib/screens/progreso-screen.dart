@@ -14,9 +14,6 @@ class ProgresoScreen extends StatefulWidget {
 }
 
 class _ProgresoScreenState extends State<ProgresoScreen> {
-  int _xpTotal = 0;
-  int _level = 1;
-  int _coins = 0;
 
   late Stream<DocumentSnapshot> userStream;
 
@@ -36,7 +33,7 @@ class _ProgresoScreenState extends State<ProgresoScreen> {
     final snapshot = await userDocRef.get();
 
     if (!snapshot.exists) {
-      // 👇 Si el usuario no existe, lo creamos con datos básicos
+      // 👇 Si el usuario no existe → lo creamos con valores por defecto
       await userDocRef.set({
         'username': user.email?.split('@')[0] ?? 'Usuario',
         'email': user.email,
@@ -45,22 +42,18 @@ class _ProgresoScreenState extends State<ProgresoScreen> {
         'level': 1,
         'coins': 0,
       });
+    } else {
+      setState(() {
+      });
     }
 
-    setState(() {
-      _xpTotal = snapshot.data()?['xpTotal'] ?? 0;
-      _level = snapshot.data()?['level'] ?? 1;
-      _coins = snapshot.data()?['coins'] ?? 0;
-    });
-
     // 👇 Escuchar cambios en tiempo real usando StreamBuilder
-    userStream =
-        FirebaseFirestore.instance
-            .collection('users')
-            .doc(user.uid)
-            .snapshots();
+    userStream = FirebaseFirestore.instance
+        .collection('users')
+        .doc(user.uid)
+        .snapshots();
 
-    // No usamos .forEach(...) para evitar setState() después de salir de la pantalla
+    // ❌ Eliminado: .forEach(...) que llamaba a setState fuera de contexto seguro
   }
 
   @override
@@ -118,12 +111,15 @@ class _ProgresoScreenState extends State<ProgresoScreen> {
 
               SizedBox(height: 10),
 
-              // 👇 LevelProgressWidget escucha cambios automáticamente
+              // 👇 LevelProgressWidget escucha automáticamente los cambios
               LevelProgressWidget(),
 
-              // Progreso diario y semanal
+              // 👇 Progreso diario
               CustomProgressDia(),
+
               SizedBox(height: 10),
+
+              // 👇 Progreso semanal
               CustomProgressSem(),
             ],
           ),

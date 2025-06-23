@@ -25,91 +25,63 @@ class HabitItem extends StatelessWidget {
     this.onCheckedChange,
   });
 
-  void _markAsCompleted(BuildContext context, bool? value) async {
-    try {
-      final user = FirebaseAuth.instance.currentUser;
-      if (user == null) return;
+ void _markAsCompleted(BuildContext context, bool? value) async {
+  try {
+    final user = FirebaseAuth.instance.currentUser;
+    if (user == null) return;
 
-      final habitDocId = habit['id'];
-      final habitXp = habit['xp'] is int ? habit['xp'] : 0;
-      final habitFrequency = habit['frequency'] ?? '';
+    final habitDocId = habit['id'];
+    final habitXp = habit['xp'] is int ? habit['xp'] : 0;
 
-      final habitStartDate = _parseDate(habit['startDate']);
-      final habitEndDate = _parseDate(habit['endDate']);
+    final habitRef = FirebaseFirestore.instance
+        .collection('users')
+        .doc(user.uid)
+        .collection('habits')
+        .doc(habitDocId);
 
-      final today = DateTime.now();
+    final habitSnapshot = await habitRef.get();
+    final habitData = habitSnapshot.data() ?? {};
+    final wasCompleted = habitData['completed'] == true;
 
-      if ((habitStartDate != null && habitStartDate.isAfter(today)) ||
-          (habitEndDate != null && habitEndDate.isBefore(today))) {
-        return;
-      }
+    final userDocRef = FirebaseFirestore.instance.collection('users').doc(user.uid);
+    final userDataSnapshot = await userDocRef.get();
+    final currentXp = userDataSnapshot.data()?['xpTotal'] ?? 0;
 
-      final habitRef = FirebaseFirestore.instance
-          .collection('users')
-          .doc(user.uid)
-          .collection('habits')
-          .doc(habitDocId);
+    if (value == true && !wasCompleted) {
+      await habitRef.update({
+        'completed': true,
+        'lastCompleted': FieldValue.serverTimestamp(),
+      });
 
-      final userDocRef = FirebaseFirestore.instance
-          .collection('users')
-          .doc(user.uid);
-      final habitSnapshot = await habitRef.get();
-      final habitData = habitSnapshot.data() ?? {};
-      final wasCompleted = habitData['completed'] == true;
+      final newXpTotal = currentXp + habitXp;
+      await userDocRef.update({'xpTotal': newXpTotal});
 
-      final userDataSnapshot = await userDocRef.get();
-      final data = userDataSnapshot.data() ?? {};
-      final currentXp = data['xpTotal'] is int ? data['xpTotal'] : 0;
+      LevelProgressWidget.checkLevelUp(newXpTotal, user.uid, context);
+    } else if (value == false && wasCompleted) {
+      await habitRef.update({
+        'completed': false,
+        'lastCompleted': null,
+      });
 
-      if (value == true && !wasCompleted) {
-        await habitRef.update({
-          'completed': true,
-          'lastCompleted': FieldValue.serverTimestamp(),
-        });
+      final newXpTotal = max(currentXp - habitXp, 0);
+      await userDocRef.update({'xpTotal': newXpTotal});
 
-        final newXpTotal = currentXp + habitXp;
-        await userDocRef.update({'xpTotal': newXpTotal});
-
-        // ✅ Ahora usamos la función estática de LevelProgressWidget
-        LevelProgressWidget.checkLevelUp(newXpTotal, user.uid, context);
-      } else if (value == false && wasCompleted) {
-        await habitRef.update({'completed': false, 'lastCompleted': null});
-
-        final newXpTotal = max(currentXp - habitXp, 0);
-        await userDocRef.update({'xpTotal': newXpTotal});
-
-        // ✅ También aquí
-        LevelProgressWidget.checkLevelUp(newXpTotal, user.uid, context);
-      }
-    } catch (e, s) {
-      // 👇 Captura errores y muestra en consola
-      print("Error al actualizar hábito: $e");
-      print(s); // Stack trace completo
-
-      ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(
-          content: Text("Hubo un error al actualizar el hábito"),
-          backgroundColor: Colors.red[600],
-          duration: Duration(seconds: 2),
-        ),
-      );
+      LevelProgressWidget.checkLevelUp(newXpTotal, user.uid, context);
     }
+  } catch (e, s) {
+    print("Error al actualizar hábito: $e");
+    print(s); // Imprime stack trace completo
   }
+}
 
- 
   // Reinicia los hábitos diarios cada mañana a las 00:00
   static void scheduleDailyReset() {
     final now = DateTime.now();
-    final nextDay = DateTime(
-      now.year,
-      now.month,
-      now.day + 1,
-    ); // Mañana a las 00:00
+    final nextDay = DateTime(now.year, now.month, now.day + 1);
     final difference = nextDay.difference(now);
 
     Future.delayed(difference, () async {
       await resetDailyHabits(); // Llama a la función de reinicio
-
       scheduleDailyReset(); // Programa el siguiente reinicio
     });
   }
@@ -146,8 +118,7 @@ class HabitItem extends StatelessWidget {
   // Reinicia hábitos semanales → una vez por semana
   static void scheduleWeeklyReset() {
     final now = DateTime.now();
-    final daysUntilMonday =
-        (now.weekday % 7) + 1; // Desde hoy hasta el próximo lunes
+    final daysUntilMonday = (now.weekday % 7) + 1;
     final nextMonday = DateTime(now.year, now.month, now.day + daysUntilMonday);
     final difference = nextMonday.difference(now);
 
@@ -201,31 +172,11 @@ class HabitItem extends StatelessWidget {
     return null;
   }
 
-  // Convierte fecha dinámica a DateTime
-  static DateTime? _parseDate(dynamic date) {
-    if (date == null) return null;
-
-    if (date is Timestamp) {
-      return date.toDate();
-    } else if (date is String) {
-      try {
-        return DateTime.parse(date);
-      } catch (_) {
-        return null;
-      }
-    } else if (date is DateTime) {
-      return date;
-    }
-
-    return null;
-  }
-
   // Compara días iguales
   static bool isSameDay(DateTime a, DateTime b) {
     return a.year == b.year && a.month == b.month && a.day == b.day;
   }
 
-  
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
@@ -269,7 +220,7 @@ class HabitItem extends StatelessWidget {
                 "$xp XP",
                 style: TextStyle(
                   color: Colors.amber,
-                  fontSize: 14,
+                  fontSize: 16,
                   fontWeight: FontWeight.bold,
                   fontFamily: 'Fredoka',
                 ),
