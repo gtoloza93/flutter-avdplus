@@ -174,7 +174,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
           ),
           SafeArea(
             child: SingleChildScrollView(
-              padding: const EdgeInsets.symmetric(horizontal: 20),
+              padding: const EdgeInsets.symmetric(horizontal: 10),
               child: Form(
                 key: _formKey,
                 child: Column(
@@ -186,12 +186,12 @@ class _RegisterScreenState extends State<RegisterScreen> {
 
                     // Logo
                     Align(
-                      alignment: Alignment.center,
+                      alignment: Alignment.centerRight,
 
                       child: Image.asset(
                         'assets/images/logo.png',
                         width:
-                            380, // Puedes cambiar esto para hacerlo más grande o pequeño
+                            400, // Puedes cambiar esto para hacerlo más grande o pequeño
 
                         fit: BoxFit.contain,
                       ),
@@ -203,7 +203,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                     Padding(
                       padding: EdgeInsets.only(
                         top: 0,
-                        left: 40,
+                        left: 75,
                       ), // Mueve el texto 20 píxeles a la izquierda
                       child: Text(
                         '¡Convierte el reto en diversión!',

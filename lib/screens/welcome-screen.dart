@@ -17,23 +17,23 @@ class WelcomeScreen extends StatelessWidget {
           ),
         ),
         child: Padding(
-          padding: const EdgeInsets.all(30.0),
+          padding: const EdgeInsets.all(10.0),
           child: Column(
             mainAxisAlignment:
                 MainAxisAlignment.start, // 👈 Ahora comienza desde arriba
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               SizedBox(
-                height: 115,
+                height: 105,
               ), // Ajusta este valor para subir o bajar el contenido
               // Logo - Centralizado horizontalmente
               Align(
-                alignment: Alignment.centerLeft,
+                alignment: Alignment.centerRight,
 
                 child: Image.asset(
                   'assets/images/logo.png',
                   width:
-                      380, // Puedes cambiar esto para hacerlo más grande o pequeño
+                      400, // Puedes cambiar esto para hacerlo más grande o pequeño
 
                   fit: BoxFit.contain,
                 ),
@@ -44,7 +44,7 @@ class WelcomeScreen extends StatelessWidget {
               Padding(
                 padding: EdgeInsets.only(
                   top: 0,
-                  left: 40,
+                  left: 75,
                 ), // Mueve el texto 20 píxeles a la izquierda
                 child: Text(
                   '¡Convierte el reto en diversión!',
