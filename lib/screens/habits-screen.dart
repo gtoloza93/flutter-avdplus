@@ -43,7 +43,7 @@ class _HabitsScreenState extends State<HabitsScreen> {
       child: Row(
         children:
             _filters.map((type) {
-              final isActive = type == _filter;
+              
 
               int count = 0;
               switch (type) {
@@ -179,7 +179,7 @@ class _HabitsScreenState extends State<HabitsScreen> {
                             .length;
                     incompletedCount = activeCount - completedCount;
 
-                    final today = DateTime.now();
+                    
 
                     switch (_filter) {
                       case 'Activos':

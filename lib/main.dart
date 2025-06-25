@@ -1,3 +1,4 @@
+import 'package:advplus/widgets/avatarcollections.dart';
 import 'package:advplus/widgets/edithabitwidget.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
@@ -7,6 +8,7 @@ import 'package:advplus/screens/login-screen.dart';
 import 'package:advplus/screens/register-screen.dart';
 import 'package:advplus/screens/home-screen.dart';
 import 'package:advplus/screens/addhabits-screen.dart';
+import 'package:provider/provider.dart';
 
 import 'firebase_options.dart';
 
@@ -21,7 +23,10 @@ void main() async {
 
   FirebaseFirestore.instance.settings = Settings(persistenceEnabled: false);
 
-  runApp(MyApp());
+  runApp( ChangeNotifierProvider(
+      create: (context) => AvatarNotifier(),
+      child: const MyApp(), ),
+  );
 }
 
 class MyApp extends StatelessWidget {
