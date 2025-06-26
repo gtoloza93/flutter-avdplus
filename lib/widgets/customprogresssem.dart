@@ -183,9 +183,9 @@ class CustomProgressSem extends StatelessWidget {
               Expanded(
                 child: Row(
                   children: [
-                    SizedBox(width: 10),
+                    SizedBox(width: 7),
                     Text(
-                      '$percent% Completado',
+                      '$percent% Completo',
                       style: TextStyle(
                         color: Colors.white,
                         fontSize: 14,

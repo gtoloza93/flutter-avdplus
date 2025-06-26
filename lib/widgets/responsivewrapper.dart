@@ -11,13 +11,13 @@ class ResponsiveWrapper extends StatelessWidget {
   final double maxTextScaleFactor;
 
   const ResponsiveWrapper({
-    Key? key,
+    super.key,
     required this.child,
     this.designWidth = 360, // Default design width (mobile-first)
     this.designHeight = 640, // Default design height
     this.allowFontScaling = true,
     this.maxTextScaleFactor = 1.4,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -41,7 +41,7 @@ class ResponsiveWrapper extends StatelessWidget {
 
             return MediaQuery(
               data: MediaQuery.of(context).copyWith(
-                textScaleFactor: textScaleFactor,
+                textScaler: TextScaler.linear(textScaleFactor),
               ),
               child: Builder(
                 builder: (context) {
@@ -75,8 +75,8 @@ class _ResponsiveValues extends InheritedWidget {
     required this.screenWidth,
     required this.screenHeight,
     required this.orientation,
-    required Widget child,
-  }) : super(child: child);
+    required super.child,
+  });
 
   @override
   bool updateShouldNotify(_ResponsiveValues oldWidget) {

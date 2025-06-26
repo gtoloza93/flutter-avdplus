@@ -182,9 +182,9 @@ class CustomProgressDia extends StatelessWidget {
               Expanded(
                 child: Row(
                   children: [
-                    SizedBox(width: 10),
+                    SizedBox(width: 8),
                     Text(
-                      '$percent% Completado',
+                    '$percent% Completo',
                       style: TextStyle(
                         color: Colors.white,
                         fontSize: 14,

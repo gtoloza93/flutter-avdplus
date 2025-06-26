@@ -33,7 +33,7 @@ class WelcomeScreen extends StatelessWidget {
                 child: Image.asset(
                   'assets/images/logo.png',
                   width:
-                      400, // Puedes cambiar esto para hacerlo más grande o pequeño
+                      365, // Puedes cambiar esto para hacerlo más grande o pequeño
 
                   fit: BoxFit.contain,
                 ),
@@ -44,21 +44,21 @@ class WelcomeScreen extends StatelessWidget {
               Padding(
                 padding: EdgeInsets.only(
                   top: 0,
-                  left: 40,
+                  left: 65,
                 ), // Mueve el texto 20 píxeles a la izquierda
                 child: Text(
                   '¡Convierte el reto en diversión!',
                   textAlign: TextAlign.center,
                   style: TextStyle(
                     color: Colors.white,
-                    fontSize: 20,
+                    fontSize: 16,
                     fontFamily: 'Fredoka',
                     fontWeight: FontWeight.w500,
                   ),
                 ),
               ),
 
-              SizedBox(height: 150), // Espacio antes de los botones
+              SizedBox(height: 180), // Espacio antes de los botones
               // Botón Registrarse
               Align(
                 alignment: Alignment.center, // Mueve el botón a la izquierda
@@ -80,7 +80,7 @@ class WelcomeScreen extends StatelessWidget {
                   child: Text(
                     "REGISTRARSE",
                     style: TextStyle(
-                      fontSize: 22,
+                      fontSize: 18,
                       fontWeight: FontWeight.w600,
                       fontFamily: 'Fredoka',
                     ),
@@ -111,7 +111,7 @@ class WelcomeScreen extends StatelessWidget {
                   child: Text(
                     "INICIAR SESIÓN",
                     style: TextStyle(
-                      fontSize: 22,
+                      fontSize: 18,
                       fontWeight: FontWeight.bold,
                       fontFamily: 'Fredoka',
                     ),
@@ -119,7 +119,7 @@ class WelcomeScreen extends StatelessWidget {
                 ),
               ),
 
-              SizedBox(height: 250),
+              SizedBox(height: 230),
 
               // Pie de página
               Align(
@@ -134,7 +134,7 @@ class WelcomeScreen extends StatelessWidget {
                 ),
               ),
 
-              SizedBox(height: 20),
+              SizedBox(height: 10),
             ],
           ),
         ),

@@ -191,33 +191,33 @@ class _RegisterScreenState extends State<RegisterScreen> {
                       child: Image.asset(
                         'assets/images/logo.png',
                         width:
-                            400, // Puedes cambiar esto para hacerlo más grande o pequeño
+                           365, // Puedes cambiar esto para hacerlo más grande o pequeño
 
                         fit: BoxFit.contain,
                       ),
                     ),
 
-                    const SizedBox(height: 5),
+                    const SizedBox(height: 3),
 
                     // Frase motivacional
                     Padding(
                       padding: EdgeInsets.only(
                         top: 0,
-                        left: 40,
+                        left: 65,
                       ), // Mueve el texto 20 píxeles a la izquierda
                       child: Text(
                         '¡Convierte el reto en diversión!',
                         textAlign: TextAlign.center,
                         style: TextStyle(
                           color: Colors.white,
-                          fontSize: 20,
+                          fontSize: 16,
                           fontFamily: 'Fredoka',
                           fontWeight: FontWeight.w500,
                         ),
                       ),
                     ),
 
-                    const SizedBox(height: 30),
+                    const SizedBox(height: 40),
 
                     // Mostrar mensaje de error si existe
                     if (_errorMessage != null)
@@ -312,7 +312,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                             25,
                           ),
                           padding: EdgeInsets.symmetric(
-                            horizontal: 112,
+                            horizontal: 115,
                             vertical: 5,
                           ),
                           shape: RoundedRectangleBorder(
@@ -332,14 +332,14 @@ class _RegisterScreenState extends State<RegisterScreen> {
                                   "REGISTRARSE",
                                   style: TextStyle(
                                     fontFamily: 'Fredoka',
-                                    fontSize: 18,
+                                    fontSize: 16,
                                     fontWeight: FontWeight.w600,
                                   ),
                                 ),
                       ),
                     ),
 
-                    const SizedBox(height: 2),
+                    const SizedBox(height: 0),
 
                     Align(
                       alignment: Alignment.center,
@@ -383,12 +383,12 @@ class _RegisterScreenState extends State<RegisterScreen> {
                           style: TextStyle(
                             color: const Color.fromARGB(255, 0, 0, 0),
                             fontFamily: 'Fredoka',
-                            fontSize: 15,
+                            fontSize: 14,
                           ),
                         ),
                       ),
                     ),
-                    SizedBox(height: 150),
+                    SizedBox(height: 130),
                     // Pie de página
                     Align(
                       alignment: Alignment.center,
@@ -402,7 +402,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                       ),
                     ),
 
-                    SizedBox(height: 20),
+                    SizedBox(height: 25),
                   ],
                 ),
               ),

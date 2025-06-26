@@ -33,13 +33,14 @@ class CustomTextField extends StatelessWidget {
           style: TextStyle(
             color: Colors.white,
             fontFamily: 'Fredoka',
-            fontSize: 20,
+            fontSize: 16,
           ),
           decoration: InputDecoration(
             hintText: hintText,
             hintStyle: TextStyle(
               color: Colors.white.withOpacity(0.7),
               fontFamily: 'Fredoka',
+              
             ),
             border: UnderlineInputBorder(
               borderSide: BorderSide(color: Colors.white, width: 1.5),

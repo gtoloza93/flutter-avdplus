@@ -436,7 +436,7 @@ class _EditHabitWidgetState extends State<EditHabitWidget> {
                                     margin: EdgeInsets.only(right: (8)),
                                     padding: EdgeInsets.symmetric(
                                       vertical: 12,
-                                      horizontal: 16,
+                                      horizontal: 14,
                                     ),
                                     decoration: BoxDecoration(
                                       color:

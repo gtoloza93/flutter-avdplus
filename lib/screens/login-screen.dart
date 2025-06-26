@@ -65,7 +65,7 @@ class LoginScreen extends StatelessWidget {
                     child: Image.asset(
                       'assets/images/logo.png',
                       width:
-                          400, // Puedes cambiar esto para hacerlo más grande o pequeño
+                          365, // Puedes cambiar esto para hacerlo más grande o pequeño
 
                       fit: BoxFit.contain,
                     ),
@@ -74,14 +74,14 @@ class LoginScreen extends StatelessWidget {
                   Padding(
                     padding: EdgeInsets.only(
                       top: 0,
-                      left: 40,
+                      left: 65,
                     ), // Mueve el texto 20 píxeles a la izquierda
                     child: Text(
                       '¡Convierte el reto en diversión!',
                       textAlign: TextAlign.center,
                       style: TextStyle(
                         color: Colors.white,
-                        fontSize: 20,
+                        fontSize: 16,
                         fontFamily: 'Fredoka',
                         fontWeight: FontWeight.w500,
                       ),
@@ -116,7 +116,7 @@ class LoginScreen extends StatelessWidget {
                       return null;
                     },
                   ),
-                  const SizedBox(height: 30),
+                  const SizedBox(height: 40),
                   Align(
                     alignment: Alignment.center,
                     child: ElevatedButton(
@@ -143,7 +143,7 @@ class LoginScreen extends StatelessWidget {
                         backgroundColor: Colors.amber[700],
                         foregroundColor: const Color.fromARGB(255, 163, 61, 25),
                         padding: EdgeInsets.symmetric(
-                          horizontal: 108,
+                          horizontal: 103,
                           vertical: 5,
                         ),
                         shape: RoundedRectangleBorder(
@@ -153,14 +153,14 @@ class LoginScreen extends StatelessWidget {
                       child: Text(
                         "INICIAR SESIÓN",
                         style: TextStyle(
-                          fontSize: 18,
+                          fontSize: 16,
                           fontWeight: FontWeight.bold,
                           fontFamily: 'Fredoka',
                         ),
                       ),
                     ),
                   ),
-                  const SizedBox(height: 5),
+                  const SizedBox(height: 0),
                   Align(
                     alignment: Alignment.center,
                     child: OutlinedButton(
@@ -184,7 +184,7 @@ class LoginScreen extends StatelessWidget {
                             style: TextStyle(
                               color: const Color.fromARGB(255, 163, 61, 25),
                               fontFamily: 'Fredoka',
-                              fontSize: 18,
+                              fontSize: 16,
                               fontWeight: FontWeight.bold,
                             ),
                           ),
@@ -203,12 +203,12 @@ class LoginScreen extends StatelessWidget {
                         style: TextStyle(
                           color: const Color.fromARGB(255, 0, 0, 0),
                           fontFamily: 'Fredoka',
-                          fontSize: 15,
+                          fontSize: 14,
                         ),
                       ),
                     ),
                   ),
-                  SizedBox(height: 220),
+                  SizedBox(height: 190),
                   // Pie de página
                   Align(
                     alignment: Alignment.center,

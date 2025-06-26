@@ -99,7 +99,7 @@ class StoreWidget extends StatelessWidget {
     final user = FirebaseAuth.instance.currentUser;
 
     return Container(
-      padding: const EdgeInsets.all(16),
+      padding: const EdgeInsets.all(13),
       margin: const EdgeInsets.symmetric(vertical: 5),
       decoration: BoxDecoration(
         color: Colors.black.withOpacity(0.7),
@@ -136,11 +136,11 @@ class StoreWidget extends StatelessWidget {
               ),
             ],
           ),
-          const SizedBox(height: 10),
+          const SizedBox(height: 8),
 
           // Sección de avatares disponibles
           SizedBox(
-            height: 150,
+            height: 130,
             child: StreamBuilder<DocumentSnapshot>(
               stream: user != null 
                   ? FirebaseFirestore.instance.collection('users').doc(user.uid).snapshots()
@@ -170,7 +170,8 @@ class StoreWidget extends StatelessWidget {
                       onTap: () => isUnlocked ? null : _buyAvatar(context, avatar),
                       child: Container(
                         width: 100,
-                        margin: const EdgeInsets.only(right: 10),
+                       
+                        margin: const EdgeInsets.only(right: 7),
                         decoration: BoxDecoration(
                           color: avatar['color'],
                           borderRadius: BorderRadius.circular(10),
@@ -189,7 +190,7 @@ class StoreWidget extends StatelessWidget {
                                     borderRadius: BorderRadius.circular(10),
                                   ),
                                   child: Padding(
-                                    padding: const EdgeInsets.all(10),
+                                    padding: const EdgeInsets.all(5),
                                     child: Image.asset(
                                       avatar['image'],
                                       fit: BoxFit.contain,
@@ -205,7 +206,7 @@ class StoreWidget extends StatelessWidget {
                                   ),
                               ],
                             ),
-                            const SizedBox(height: 5),
+                            const SizedBox(height: 2),
                             Text(
                               avatar['name'],
                               style: const TextStyle(
@@ -215,6 +216,7 @@ class StoreWidget extends StatelessWidget {
                                 fontSize: 11,
                               ),
                             ),
+                            
                             Text(
                               isUnlocked ? 'Obtenido' : '${avatar['price']} coins',
                               style: TextStyle(

@@ -230,7 +230,7 @@ class _AvatarCollectionsState extends State<AvatarCollections> {
                           ),
                         ),
                         child: Padding(
-                          padding: EdgeInsets.all(20),
+                          padding: EdgeInsets.all(10),
                           child: Image.asset(
                             selectedAvatar,
                             fit: BoxFit.contain,
@@ -254,9 +254,9 @@ class _AvatarCollectionsState extends State<AvatarCollections> {
                         fontWeight: FontWeight.bold,
                       ),
                     ),
-                    SizedBox(height: 10),
+                    SizedBox(height: 5),
                     SizedBox(
-                      height: 80,
+                      height: 75,
                       child: Column(
                         children: [
                           Expanded(
@@ -284,8 +284,8 @@ class _AvatarCollectionsState extends State<AvatarCollections> {
                                         await _saveAvatar(newAvatar, newColor);
                                       },
                                       child: Container(
-                                        width: 80,
-                                        height: 80,
+                                        width: 75,
+                                        height: 75,
                                         margin: EdgeInsets.symmetric(
                                           horizontal: 5,
                                         ),
