@@ -5,7 +5,6 @@ import 'package:advplus/widgets/rewarddisplay.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 
-
 class AddHabitScreen extends StatefulWidget {
   const AddHabitScreen({super.key});
 
@@ -23,34 +22,34 @@ class _AddHabitScreenState extends State<AddHabitScreen> {
   bool _reminder = false;
   String _difficulty = 'DIFÍCIL';
 
- int calculateXP(String frequency, String difficulty) {
-  if (frequency == 'DIARIO') {
-    switch (difficulty) {
-      case 'FÁCIL':
-        return 15;
-      case 'INTERMEDIO':
-        return 35;
-      case 'DIFÍCIL':
-        return 70;
-      default:
-        return 0;
+  int calculateXP(String frequency, String difficulty) {
+    if (frequency == 'DIARIO') {
+      switch (difficulty) {
+        case 'FÁCIL':
+          return 15;
+        case 'INTERMEDIO':
+          return 35;
+        case 'DIFÍCIL':
+          return 70;
+        default:
+          return 0;
+      }
+    } else if (frequency == 'SEMANAL') {
+      switch (difficulty) {
+        case 'FÁCIL':
+          return 90;
+        case 'INTERMEDIO':
+          return 180;
+        case 'DIFÍCIL':
+          return 360;
+        default:
+          return 0;
+      }
+    } else {
+      double nivel = difficulty == 'FÁCIL' ? 1 : difficulty == 'INTERMEDIO' ? 2 : 3;
+      return (200 * pow(nivel, 1.5).toDouble() + 100).toInt();
     }
-  } else if (frequency == 'SEMANAL') {
-    switch (difficulty) {
-      case 'FÁCIL':
-        return 90;
-      case 'INTERMEDIO':
-        return 180;
-      case 'DIFÍCIL':
-        return 360;
-      default:
-        return 0;
-    }
-  } else {
-    double nivel = difficulty == 'FÁCIL' ? 1 : difficulty == 'INTERMEDIO' ? 2 : 3;
-    return (200 * pow(nivel, 1.5).toDouble() + 100).toInt();
   }
-}
 
   String _formatTime(TimeOfDay time) {
     final hour = time.hour.toString().padLeft(2, '0');
@@ -75,6 +74,7 @@ class _AddHabitScreenState extends State<AddHabitScreen> {
     int xpToShow = calculateXP(_frequency, _difficulty);
 
     return Scaffold(
+      resizeToAvoidBottomInset: false, // Esta línea evita que la pantalla se redimensione con el teclado
       body: Container(
         width: double.infinity,
         height: double.infinity,
@@ -86,7 +86,6 @@ class _AddHabitScreenState extends State<AddHabitScreen> {
             fit: BoxFit.cover,
           ),
         ),
-
         child: Padding(
           padding: const EdgeInsets.only(
             left: 15.0,

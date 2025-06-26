@@ -219,8 +219,8 @@ class _AvatarCollectionsState extends State<AvatarCollections> {
                       duration: Duration(milliseconds: 300),
                       child: Container(
                         key: ValueKey<String>(selectedAvatar),
-                        width: 115,
-                        height: 115,
+                        width: 120,
+                        height: 120,
                         decoration: BoxDecoration(
                           color: selectedAvatarColor, // Usamos el color guardado
                           borderRadius: BorderRadius.circular(12),
