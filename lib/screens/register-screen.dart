@@ -225,7 +225,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                         padding: const EdgeInsets.only(bottom: 10),
                         child: Text(
                           _errorMessage!,
-                          style: TextStyle(color: Colors.red, fontSize: 16),
+                          style: TextStyle(color: Colors.red, fontSize: 14),
                         ),
                       ),
 
