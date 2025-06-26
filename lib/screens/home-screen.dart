@@ -165,9 +165,9 @@ class _HomeScreenState extends State<HomeScreen> {
 
        CustomProgressBar(),
 
-        SizedBox(height: 15),
+        SizedBox(height: 8),
         HabitCounter(),
-        SizedBox(height: 10),
+        SizedBox(height: 8),
         Expanded(
           child: StreamBuilder<QuerySnapshot>(
             stream: habitsStream,
@@ -270,7 +270,7 @@ class _HomeScreenState extends State<HomeScreen> {
                   "Añadir Hábito",
                   style: TextStyle(
                     fontFamily: 'Fredoka',
-                    fontSize: 18,
+                    fontSize: 16,
                     fontWeight: FontWeight.bold,
                   ),
                 ),

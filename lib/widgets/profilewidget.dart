@@ -143,12 +143,12 @@ class _ProfileWidgetState extends State<ProfileWidget> {
                   "¡Hola, $_username!",
                   style: TextStyle(
                     color: Colors.amber,
-                    fontSize: 18,
+                    fontSize: 16,
                     fontFamily: 'Fredoka',
                     fontWeight: FontWeight.bold,
                   ),
                 ),
-                SizedBox(height: 8),
+                SizedBox(height: 5),
                 Row(
                   children: [
                     Image.asset(
@@ -167,12 +167,12 @@ class _ProfileWidgetState extends State<ProfileWidget> {
                         fontWeight: FontWeight.bold,
                       ),
                     ),
-                    SizedBox(width: 6),
+                    SizedBox(width: 8),
                     Text(
                       "Niv: $_level",
                       style: TextStyle(
                         color: Colors.white,
-                        fontSize: 16,
+                        fontSize: 14,
                         fontFamily: 'Fredoka',
                       ),
                     ),
@@ -191,7 +191,7 @@ class _ProfileWidgetState extends State<ProfileWidget> {
                   "Hoy",
                   style: TextStyle(
                     color: Colors.amber,
-                    fontSize: 18,
+                    fontSize: 16,
                     fontFamily: 'Fredoka',
                     fontWeight: FontWeight.w600,
                   ),

@@ -148,7 +148,7 @@ class _AvatarCollectionsState extends State<AvatarCollections> {
             SizedBox(height: 5),
             Expanded(
               child: Container(
-                padding: EdgeInsets.symmetric(vertical: 10, horizontal: 10),
+                padding: EdgeInsets.symmetric(vertical: 10, horizontal: 12),
                 decoration: BoxDecoration(
                   color: const Color.fromARGB(211, 0, 0, 0),
                   borderRadius: BorderRadius.circular(12),
@@ -171,7 +171,7 @@ class _AvatarCollectionsState extends State<AvatarCollections> {
                               "Recompensas",
                               style: TextStyle(
                                 color: Colors.amber,
-                                fontSize: 20,
+                                fontSize: 16,
                                 fontFamily: 'Fredoka',
                                 fontWeight: FontWeight.bold,
                               ),
@@ -203,7 +203,7 @@ class _AvatarCollectionsState extends State<AvatarCollections> {
                                   "$coins Coins",
                                   style: TextStyle(
                                     color: Colors.white,
-                                    fontSize: 18,
+                                    fontSize: 16,
                                     fontFamily: 'Fredoka',
                                     fontWeight: FontWeight.bold,
                                   ),
@@ -219,8 +219,8 @@ class _AvatarCollectionsState extends State<AvatarCollections> {
                       duration: Duration(milliseconds: 300),
                       child: Container(
                         key: ValueKey<String>(selectedAvatar),
-                        width: 130,
-                        height: 130,
+                        width: 140,
+                        height: 140,
                         decoration: BoxDecoration(
                           color: selectedAvatarColor, // Usamos el color guardado
                           borderRadius: BorderRadius.circular(12),
@@ -244,17 +244,17 @@ class _AvatarCollectionsState extends State<AvatarCollections> {
                         ),
                       ),
                     ),
-                    SizedBox(height: 5),
+                    SizedBox(height: 0),
                     Text(
                       "Mi Avatar",
                       style: TextStyle(
                         color: Colors.white,
-                        fontSize: 20,
+                        fontSize: 14,
                         fontFamily: 'Fredoka',
                         fontWeight: FontWeight.bold,
                       ),
                     ),
-                    SizedBox(height: 20),
+                    SizedBox(height: 10),
                     SizedBox(
                       height: 80,
                       child: Column(

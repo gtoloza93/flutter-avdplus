@@ -83,7 +83,7 @@ class CustomProgressBar extends StatelessWidget {
             overflow: TextOverflow.ellipsis,
             style: const TextStyle(
               color: Colors.white,
-              fontSize: 14,
+              fontSize: 12,
               fontWeight: FontWeight.w500,
               fontFamily: 'Fredoka',
             ),
@@ -98,7 +98,7 @@ class CustomProgressBar extends StatelessWidget {
                 height: 24,
                 fit: BoxFit.fitWidth,
               ),
-              const SizedBox(width: 15),
+              const SizedBox(width: 10),
               Expanded(
                 child: Text(
                   'Tu Progreso Hoy : $percent%',
@@ -106,7 +106,7 @@ class CustomProgressBar extends StatelessWidget {
                   overflow: TextOverflow.ellipsis,
                   style: const TextStyle(
                     color: Colors.amber,
-                    fontSize: 18,
+                    fontSize: 16,
                     fontWeight: FontWeight.w600,
                     fontFamily: 'Fredoka',
                   ),

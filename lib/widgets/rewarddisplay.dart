@@ -69,7 +69,7 @@ class RewardDisplay extends StatelessWidget {
             "Recompensa esperada :",
             style: TextStyle(
               color: Colors.amber,
-              fontSize: 18,
+              fontSize: 16,
               fontFamily: 'Fredoka',
               fontWeight: FontWeight.w500,
             ),
@@ -79,7 +79,7 @@ class RewardDisplay extends StatelessWidget {
             "$xp XP",
             style: TextStyle(
               color: const Color.fromARGB(255, 255, 255, 255),
-              fontSize: 20,
+              fontSize: 16,
               fontWeight: FontWeight.bold,
             ),
           ),

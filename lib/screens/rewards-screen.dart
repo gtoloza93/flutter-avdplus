@@ -35,7 +35,7 @@ class RewardsScreen extends StatelessWidget {
               ProfileWidget(),
               Expanded(child: AvatarCollections(avatarNotifier: avatarNotifier)),
               
-              SizedBox(height: 5),
+              SizedBox(height: 3),
 
               NextRewards(),
 

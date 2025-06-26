@@ -21,13 +21,13 @@ class HabitCounter extends StatelessWidget {
         if (!snapshot.hasData) {
           return Row(
             children: [
-              Image.asset('assets/icons/Hoy.png', width: 30, height: 30),
-              SizedBox(width: 10),
+              Image.asset('assets/icons/Hoy.png', width: 26, height: 26),
+              SizedBox(width: 5),
               Text(
                 'Objetivos de Hoy :',
                 style: TextStyle(
                   color: Colors.amber,
-                  fontSize: 18,
+                  fontSize: 14,
                   fontWeight: FontWeight.bold,
                 ),
               ),
@@ -43,6 +43,7 @@ class HabitCounter extends StatelessWidget {
                   style: TextStyle(
                     color: Colors.white,
                     fontFamily: 'Fredoka',
+                    fontSize: 14,
                   ),
                 ),
               ),
@@ -61,13 +62,13 @@ class HabitCounter extends StatelessWidget {
 
         return Row(
           children: [
-            Image.asset('assets/icons/Hoy.png', width: 30, height: 30),
-            SizedBox(width: 10),
+            Image.asset('assets/icons/Hoy.png', width: 26, height: 26),
+            SizedBox(width: 5),
             Text(
               'Objetivos de Hoy :',
               style: TextStyle(
                 color: Colors.amber,
-                fontSize: 18,
+                fontSize: 16,
                 fontWeight: FontWeight.bold,
               ),
             ),
@@ -83,6 +84,7 @@ class HabitCounter extends StatelessWidget {
                 style: TextStyle(
                   color: Colors.white,
                   fontFamily: 'Fredoka',
+                  fontSize: 14,
                 ),
               ),
             ),

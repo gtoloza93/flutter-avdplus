@@ -108,7 +108,7 @@ class CustomProgressSem extends StatelessWidget {
                   overflow: TextOverflow.ellipsis,
                   style: TextStyle(
                     color: Colors.amber,
-                    fontSize: 20,
+                    fontSize: 17,
                     fontWeight: FontWeight.w600,
                     fontFamily: 'Fredoka',
                   ),
@@ -121,7 +121,7 @@ class CustomProgressSem extends StatelessWidget {
                     '$xpTotal XP',
                     style: TextStyle(
                       color: Colors.white,
-                      fontSize: 20,
+                      fontSize: 17,
                       fontWeight: FontWeight.bold,
                       fontFamily: 'Fredoka',
                     ),
@@ -175,7 +175,7 @@ class CustomProgressSem extends StatelessWidget {
                 'Semanal :',
                 style: TextStyle(
                   color: Colors.amber,
-                  fontSize: 18,
+                  fontSize: 14,
                   fontWeight: FontWeight.w600,
                   fontFamily: 'Fredoka',
                 ),
@@ -188,7 +188,7 @@ class CustomProgressSem extends StatelessWidget {
                       '$percent% Completado',
                       style: TextStyle(
                         color: Colors.white,
-                        fontSize: 16,
+                        fontSize: 14,
                         fontWeight: FontWeight.w600,
                       ),
                     ),
@@ -197,7 +197,7 @@ class CustomProgressSem extends StatelessWidget {
               ),
               Expanded(
                 child: Padding(
-                  padding: EdgeInsets.only(left: 90),
+                  padding: EdgeInsets.only(left: 70),
                   child: WeeklyHabitCounter(), // Muestra cuántos hábitos completaste hoy
                 ),
               ),

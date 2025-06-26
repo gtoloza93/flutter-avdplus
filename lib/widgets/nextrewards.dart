@@ -80,8 +80,8 @@ class NextRewards extends StatelessWidget {
                 children: [
                   Image.asset(
                     'assets/icons/boton.png',
-                    width: 26,
-                    height: 26,
+                    width: 24,
+                    height: 24,
                     errorBuilder: (_, __, ___) => const Icon(Icons.help_outline, color: Colors.amber),
                   ),
                   const SizedBox(width: 10),
@@ -89,7 +89,7 @@ class NextRewards extends StatelessWidget {
                     "Próximas recompensas",
                     style: TextStyle(
                       color: Colors.amber,
-                      fontSize: 18,
+                      fontSize: 16,
                       fontFamily: 'Fredoka',
                       fontWeight: FontWeight.bold,
                     ),

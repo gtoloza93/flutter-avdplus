@@ -44,7 +44,7 @@ class WelcomeScreen extends StatelessWidget {
               Padding(
                 padding: EdgeInsets.only(
                   top: 0,
-                  left: 75,
+                  left: 40,
                 ), // Mueve el texto 20 píxeles a la izquierda
                 child: Text(
                   '¡Convierte el reto en diversión!',

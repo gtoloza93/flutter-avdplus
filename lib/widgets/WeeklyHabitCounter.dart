@@ -64,7 +64,7 @@ class WeeklyHabitCounter extends StatelessWidget {
           '$completedThisWeek/${habitDocs.length}',
           style: const TextStyle(
             color: Colors.white,
-            fontSize: 18,
+            fontSize: 16,
             fontFamily: 'Fredoka',
             fontWeight: FontWeight.w600,
           ),

@@ -208,7 +208,7 @@ class HabitItem extends StatelessWidget {
                 text,
                 style: TextStyle(
                   color: Colors.white,
-                  fontSize: 16,
+                  fontSize: 14,
                   fontFamily: 'Fredoka',
                 ),
               ),
@@ -220,7 +220,7 @@ class HabitItem extends StatelessWidget {
                 "$xp XP",
                 style: TextStyle(
                   color: Colors.amber,
-                  fontSize: 16,
+                  fontSize: 14,
                   fontWeight: FontWeight.bold,
                   fontFamily: 'Fredoka',
                 ),

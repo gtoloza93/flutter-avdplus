@@ -34,7 +34,7 @@ class DailyHabitCounter extends StatelessWidget {
           '$completedToday/${habitDocs.length}',
           style: const TextStyle(
             color: Colors.white,
-            fontSize: 18,
+            fontSize: 16,
             fontWeight: FontWeight.w600,
             fontFamily: 'Fredoka',
           ),

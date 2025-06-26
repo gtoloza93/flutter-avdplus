@@ -224,7 +224,7 @@ class _EditHabitWidgetState extends State<EditHabitWidget> {
                               "Editar Habito:",
                               style: TextStyle(
                                 color: Colors.amber,
-                                fontSize: 20,
+                                fontSize: 16,
                                 fontFamily: 'Fredoka',
                                 fontWeight: FontWeight.w600,
                               ),
@@ -245,7 +245,7 @@ class _EditHabitWidgetState extends State<EditHabitWidget> {
                                 "Hoy",
                                 style: TextStyle(
                                   color: Colors.amber,
-                                  fontSize: 18,
+                                  fontSize: 16,
                                   fontFamily: 'Fredoka',
                                   fontWeight: FontWeight.w600,
                                 ),
@@ -295,7 +295,7 @@ class _EditHabitWidgetState extends State<EditHabitWidget> {
                             style: TextStyle(
                               color: Colors.amber,
                               fontFamily: 'Fredoka',
-                              fontSize: 18,
+                              fontSize: 16,
                             ),
                           ),
                         ],
@@ -324,6 +324,7 @@ class _EditHabitWidgetState extends State<EditHabitWidget> {
                           hintStyle: TextStyle(
                             color: Colors.grey[500],
                             fontFamily: 'Fredoka',
+                            fontSize: 14,
                           ),
                           contentPadding: EdgeInsets.symmetric(
                             horizontal: 10,
@@ -353,7 +354,7 @@ class _EditHabitWidgetState extends State<EditHabitWidget> {
                             style: TextStyle(
                               color: Colors.amber,
                               fontFamily: 'Fredoka',
-                              fontSize: 18,
+                              fontSize: 16,
                             ),
                           ),
                         ],
@@ -367,7 +368,7 @@ class _EditHabitWidgetState extends State<EditHabitWidget> {
                                   onTap:
                                       () => setState(() => _frequency = freq),
                                   child: Container(
-                                    margin: EdgeInsets.only(right: 10),
+                                    margin: EdgeInsets.only(right: 8),
                                     padding: EdgeInsets.symmetric(
                                       vertical: 12,
                                       horizontal: 16,
@@ -388,6 +389,7 @@ class _EditHabitWidgetState extends State<EditHabitWidget> {
                                                   ? Colors.amber
                                                   : Colors.white,
                                           fontFamily: 'Fredoka',
+                                          fontSize: 12,
                                         ),
                                       ),
                                     ),
@@ -418,7 +420,7 @@ class _EditHabitWidgetState extends State<EditHabitWidget> {
                             style: TextStyle(
                               color: Colors.amber,
                               fontFamily: 'Fredoka',
-                              fontSize: 18,
+                              fontSize: 16,
                             ),
                           ),
                         ],
@@ -431,7 +433,7 @@ class _EditHabitWidgetState extends State<EditHabitWidget> {
                                   onTap:
                                       () => setState(() => _difficulty = diff),
                                   child: Container(
-                                    margin: EdgeInsets.only(right: 10),
+                                    margin: EdgeInsets.only(right: (8)),
                                     padding: EdgeInsets.symmetric(
                                       vertical: 12,
                                       horizontal: 16,
@@ -452,6 +454,7 @@ class _EditHabitWidgetState extends State<EditHabitWidget> {
                                                   ? Colors.amber
                                                   : Colors.white,
                                           fontFamily: 'Fredoka',
+                                          fontSize: 12,
                                         ),
                                       ),
                                     ),
@@ -482,7 +485,7 @@ class _EditHabitWidgetState extends State<EditHabitWidget> {
                             style: TextStyle(
                               color: Colors.amber,
                               fontFamily: 'Fredoka',
-                              fontSize: 18,
+                              fontSize: 16,
                             ),
                           ),
                         ],
@@ -534,7 +537,7 @@ class _EditHabitWidgetState extends State<EditHabitWidget> {
                             style: TextStyle(
                               color: Colors.amber,
                               fontFamily: 'Fredoka',
-                              fontSize: 18,
+                              fontSize: 16,
                             ),
                           ),
                         ],
@@ -594,7 +597,7 @@ class _EditHabitWidgetState extends State<EditHabitWidget> {
                             style: TextStyle(
                               color: Colors.amber,
                               fontFamily: 'Fredoka',
-                              fontSize: 18,
+                              fontSize: 16,
                             ),
                           ),
                         ],
@@ -676,7 +679,7 @@ class _EditHabitWidgetState extends State<EditHabitWidget> {
                                 "Guardar",
                                 style: TextStyle(
                                   fontFamily: 'Fredoka',
-                                  fontSize: 18,
+                                  fontSize: 16,
                                   fontWeight: FontWeight.bold,
                                 ),
                               ),

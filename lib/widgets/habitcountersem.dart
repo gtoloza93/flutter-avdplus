@@ -27,7 +27,7 @@ class HabitCounterSem extends StatelessWidget {
                 'Objetivo Semanal :',
                 style: TextStyle(
                   color: Colors.amber,
-                  fontSize: 18,
+                  fontSize: 16,
                   fontWeight: FontWeight.bold,
                 ),
               ),
@@ -43,6 +43,7 @@ class HabitCounterSem extends StatelessWidget {
                   style: TextStyle(
                     color: Colors.white,
                     fontFamily: 'Fredoka',
+                    fontSize: 14,
                   ),
                 ),
               ),
@@ -66,7 +67,7 @@ class HabitCounterSem extends StatelessWidget {
               'Objetivo Semanal :',
               style: TextStyle(
                 color: Colors.amber,
-                fontSize: 18,
+                fontSize: 16,
                 fontWeight: FontWeight.bold,
               ),
             ),
@@ -82,6 +83,7 @@ class HabitCounterSem extends StatelessWidget {
                 style: TextStyle(
                   color: Colors.white,
                   fontFamily: 'Fredoka',
+                  fontSize: 16,
                 ),
               ),
             ),

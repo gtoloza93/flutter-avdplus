@@ -189,7 +189,7 @@ class _LevelProgressWidgetState extends State<LevelProgressWidget> {
                 "Nivel: $_level",
                 style: TextStyle(
                   color: Colors.amber,
-                  fontSize: 20,
+                  fontSize: 16,
                   fontFamily: 'Fredoka',
                   fontWeight: FontWeight.w600,
                 ),
@@ -233,7 +233,7 @@ class _LevelProgressWidgetState extends State<LevelProgressWidget> {
                 style: TextStyle(
                   color: const Color.fromARGB(255, 255, 255, 255),
                   fontFamily: 'Fredoka',
-                  fontSize: 16,
+                  fontSize: 14,
                 ),
               ),
               Text(
@@ -241,7 +241,7 @@ class _LevelProgressWidgetState extends State<LevelProgressWidget> {
                 style: TextStyle(
                   color: Colors.white,
                   fontFamily: 'Fredoka',
-                  fontSize: 16,
+                  fontSize: 14,
                 ),
               ),
             ],
@@ -272,7 +272,7 @@ class _LevelProgressWidgetState extends State<LevelProgressWidget> {
             style: TextStyle(
               color: const Color.fromARGB(255, 255, 255, 255),
               fontFamily: 'Fredoka',
-              fontSize: 16,
+              fontSize: 14,
             ),
           ),
         ],

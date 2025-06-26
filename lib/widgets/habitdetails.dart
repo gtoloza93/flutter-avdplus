@@ -121,7 +121,7 @@ class HabitDetailsScreen extends StatelessWidget {
                               "Detalles del Habito:",
                               style: TextStyle(
                                 color: Colors.amber,
-                                fontSize: 20,
+                                fontSize: 16,
                                 fontFamily: 'Fredoka',
                                 fontWeight: FontWeight.w600,
                               ),
@@ -142,7 +142,7 @@ class HabitDetailsScreen extends StatelessWidget {
                                 "Hoy",
                                 style: TextStyle(
                                   color: Colors.amber,
-                                  fontSize: 18,
+                                  fontSize: 16,
                                   fontFamily: 'Fredoka',
                                   fontWeight: FontWeight.w600,
                                 ),
@@ -191,7 +191,7 @@ class HabitDetailsScreen extends StatelessWidget {
                             "Nombre del hábito:",
                             style: TextStyle(
                               color: Colors.amber,
-                              fontSize: 18,
+                              fontSize: 16,
                               fontFamily: 'Fredoka',
                             ),
                           ),
@@ -204,7 +204,7 @@ class HabitDetailsScreen extends StatelessWidget {
                         style: TextStyle(
                           color: const Color.fromARGB(197, 255, 255, 255),
                           fontFamily: 'Fredoka',
-                          fontSize: 16,
+                          fontSize: 14,
                         ),
                         decoration: InputDecoration(
                           hintText: "Ej: Tomar agua",
@@ -245,7 +245,7 @@ class HabitDetailsScreen extends StatelessWidget {
                             "Frecuencia:",
                             style: TextStyle(
                               color: Colors.amber,
-                              fontSize: 18,
+                              fontSize: 16,
                               fontFamily: 'Fredoka',
                             ),
                           ),
@@ -256,6 +256,7 @@ class HabitDetailsScreen extends StatelessWidget {
                               color: Colors.white,
                               fontFamily: 'Fredoka',
                               fontWeight: FontWeight.bold,
+                              fontSize: 14,
                             ),
                           ),
                         ],
@@ -282,7 +283,7 @@ class HabitDetailsScreen extends StatelessWidget {
                             "Hora:",
                             style: TextStyle(
                               color: Colors.amber,
-                              fontSize: 18,
+                              fontSize: 16,
                               fontFamily: 'Fredoka',
                             ),
                           ),
@@ -293,6 +294,7 @@ class HabitDetailsScreen extends StatelessWidget {
                               color: Colors.white,
                               fontFamily: 'Fredoka',
                               fontWeight: FontWeight.bold,
+                              fontSize: 14,
                             ),
                           ),
                         ],
@@ -319,7 +321,7 @@ class HabitDetailsScreen extends StatelessWidget {
                             "Fecha inicio:",
                             style: TextStyle(
                               color: Colors.amber,
-                              fontSize: 18,
+                              fontSize: 16,
                               fontFamily: 'Fredoka',
                             ),
                           ),
@@ -356,7 +358,7 @@ class HabitDetailsScreen extends StatelessWidget {
                             "Fecha fin:",
                             style: TextStyle(
                               color: Colors.amber,
-                              fontSize: 18,
+                              fontSize: 16,
                               fontFamily: 'Fredoka',
                             ),
                           ),
@@ -393,7 +395,7 @@ class HabitDetailsScreen extends StatelessWidget {
                             "Recordatorio:",
                             style: TextStyle(
                               color: Colors.amber,
-                              fontSize: 18,
+                              fontSize: 16,
                               fontFamily: 'Fredoka',
                             ),
                           ),
@@ -457,7 +459,7 @@ class HabitDetailsScreen extends StatelessWidget {
                             "Dificultad:",
                             style: TextStyle(
                               color: Colors.amber,
-                              fontSize: 18,
+                              fontSize: 16,
                               fontFamily: 'Fredoka',
                             ),
                           ),
@@ -504,7 +506,7 @@ class HabitDetailsScreen extends StatelessWidget {
                           "Recompensa esperada :",
                           style: TextStyle(
                             color: Colors.amber,
-                            fontSize: 18,
+                            fontSize: 16,
                             fontFamily: 'Fredoka',
                             fontWeight: FontWeight.w500,
                           ),
@@ -568,7 +570,7 @@ class HabitDetailsScreen extends StatelessWidget {
                                 "Editar",
                                 style: TextStyle(
                                   color: Colors.amber,
-                                  fontSize: 18,
+                                  fontSize: 16,
                                   fontFamily: 'Fredoka',
                                   fontWeight: FontWeight.bold,
                                 ),
@@ -639,7 +641,7 @@ class HabitDetailsScreen extends StatelessWidget {
                                 "Eliminar",
                                 style: TextStyle(
                                   color: Colors.amber,
-                                  fontSize: 18,
+                                  fontSize: 16,
                                   fontFamily: 'Fredoka',
                                   fontWeight: FontWeight.bold,
                                 ),

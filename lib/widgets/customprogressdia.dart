@@ -107,7 +107,7 @@ class CustomProgressDia extends StatelessWidget {
                   overflow: TextOverflow.ellipsis,
                   style: TextStyle(
                     color: Colors.amber,
-                    fontSize: 20,
+                    fontSize: 17,
                     fontWeight: FontWeight.w600,
                     fontFamily: 'Fredoka',
                   ),
@@ -174,7 +174,7 @@ class CustomProgressDia extends StatelessWidget {
                 'Hoy :',
                 style: TextStyle(
                   color: Colors.amber,
-                  fontSize: 18,
+                  fontSize: 14,
                   fontWeight: FontWeight.w600,
                   fontFamily: 'Fredoka',
                 ),
@@ -187,7 +187,7 @@ class CustomProgressDia extends StatelessWidget {
                       '$percent% Completado',
                       style: TextStyle(
                         color: Colors.white,
-                        fontSize: 16,
+                        fontSize: 14,
                         fontWeight: FontWeight.w600,
                       ),
                     ),
@@ -196,7 +196,7 @@ class CustomProgressDia extends StatelessWidget {
               ),
               Expanded(
                 child: Padding(
-                  padding: EdgeInsets.only(left: 100),
+                  padding: EdgeInsets.only(left: 85),
                   child: DailyHabitCounter(), // Muestra cuántos hábitos completaste hoy
                 ),
               ),

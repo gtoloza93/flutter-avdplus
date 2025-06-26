@@ -177,6 +177,7 @@ class _NotificationWidgetState extends State<NotificationWidget> {
                         "${_currentHabit!['name']} a las ${_currentHabit!['startTime']}",
                         style: _notificationTextStyle(
                           fontWeight: FontWeight.bold,
+                          
                         ),
                       ),
                     ),
@@ -187,7 +188,7 @@ class _NotificationWidgetState extends State<NotificationWidget> {
                 "No hay notificaciones ",
                 style: _notificationTextStyle(
                   color: const Color.fromARGB(255, 255, 255, 255),
-                ).copyWith(fontFamily: 'Fredoka', fontWeight: FontWeight.bold),
+                ).copyWith(fontFamily: 'Fredoka', fontWeight: FontWeight.bold, fontSize : 14,),
               ),
     );
   }

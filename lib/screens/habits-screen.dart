@@ -81,13 +81,14 @@ class _HabitsScreenState extends State<HabitsScreen> {
                           });
                         },
                         activeColor: Colors.amber,
-                        visualDensity: VisualDensity.compact,
+                        visualDensity: VisualDensity.standard,
                       ),
                       Text(
                         "$type: $count",
                         style: TextStyle(
                           fontFamily: 'Fredoka',
                           color: Colors.white,
+                          fontSize: 14,
                         ),
                       ),
                     ],
@@ -121,23 +122,23 @@ class _HabitsScreenState extends State<HabitsScreen> {
               Container(
                 padding: EdgeInsets.symmetric(vertical: 15, horizontal: 10),
                 decoration: BoxDecoration(
-                  color: const Color.fromARGB(211, 0, 0, 0),
+                  color: const Color.fromARGB(210, 0, 0, 0),
                   borderRadius: BorderRadius.circular(12),
                 ),
                 child: Row(
                   children: [
                     Image.asset(
                       'assets/icons/milisthabits.png',
-                      width: 32,
-                      height: 32,
+                      width: 26,
+                      height: 26,
                       fit: BoxFit.contain,
                     ),
-                    SizedBox(width: 10),
+                    SizedBox(width: 5),
                     Text(
                       "Mis Hábitos :",
                       style: TextStyle(
                         color: Colors.amber,
-                        fontSize: 18,
+                        fontSize: 16,
                         fontWeight: FontWeight.bold,
                         fontFamily: 'Fredoka',
                       ),
@@ -146,12 +147,12 @@ class _HabitsScreenState extends State<HabitsScreen> {
                 ),
               ),
 
-              SizedBox(height: 10),
+              SizedBox(height: 5),
 
               // 👇 Botones con Radio y Contador
               _buildFilterButtons(context),
 
-              SizedBox(height: 10),
+              SizedBox(height: 0),
 
               // 👇 Lista de hábitos filtrada
               Expanded(
@@ -227,9 +228,9 @@ class _HabitsScreenState extends State<HabitsScreen> {
 
                     return Padding(
                       padding: EdgeInsets.only(
-                        left: 5.0,
-                        right: 5.0,
-                        top: 10,
+                        left: 0,
+                        right: 0,
+                        top: 5,
                         bottom: 80,
                       ), // Ajusta este valor según necesites
                       child: HabitList(
@@ -268,7 +269,7 @@ class _HabitsScreenState extends State<HabitsScreen> {
                           overflow: TextOverflow.ellipsis,
                           style: TextStyle(
                             color: Colors.amber,
-                            fontSize: 18,
+                            fontSize: 16,
                             fontWeight: FontWeight.w600,
                             fontFamily: 'Fredoka',
                           ),

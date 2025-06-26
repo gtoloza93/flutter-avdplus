@@ -22,13 +22,13 @@ class MotivationalQuote extends StatelessWidget {
             mainAxisAlignment:
                 MainAxisAlignment.start, // Empuja el texto a la derecha
             children: [
-              Image.asset(iconPath, width: 30, height: 30, fit: BoxFit.contain),
+              Image.asset(iconPath, width: 26, height: 26, fit: BoxFit.contain),
               SizedBox(width: 10),
               Text(
                 "Frase Motivadora.",
                 style: TextStyle(
                   color: Colors.amber,
-                  fontSize: 18,
+                  fontSize: 16,
                   fontWeight: FontWeight.bold,
                   fontFamily: 'Fredoka',
                 ),
@@ -38,13 +38,13 @@ class MotivationalQuote extends StatelessWidget {
           SizedBox(height: 8),
           // 👇 Icono + Frase en fila
           Wrap(
-            alignment: WrapAlignment.spaceBetween, // Centra el texto
+            alignment: WrapAlignment.spaceAround, // Centra el texto
             children: [
               Text(
                 '"$quote"',
                 style: TextStyle(
                   color: Colors.white,
-                  fontSize: 17,
+                  fontSize: 14,
                   fontWeight: FontWeight.w600,
                   fontFamily: 'Fredoka',
                 ),

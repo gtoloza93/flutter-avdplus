@@ -113,8 +113,8 @@ class StoreWidget extends StatelessWidget {
             children: [
               Image.asset(
                 'assets/icons/boton.png',
-                width: 26,
-                height: 26,
+                width: 24,
+                height: 24,
                 errorBuilder: (_, __, ___) => Icon(Icons.shopping_cart, color: Colors.amber),
               ),
               const SizedBox(width: 10),
@@ -122,7 +122,7 @@ class StoreWidget extends StatelessWidget {
                 "Tienda",
                 style: TextStyle(
                   color: Colors.amber,
-                  fontSize: 20,
+                  fontSize: 16,
                   fontFamily: 'Fredoka',
                   fontWeight: FontWeight.bold,
                 ),
@@ -212,6 +212,7 @@ class StoreWidget extends StatelessWidget {
                                 color: Colors.black,
                                 fontFamily: 'Fredoka',
                                 fontWeight: FontWeight.bold,
+                                fontSize: 11,
                               ),
                             ),
                             Text(
@@ -220,6 +221,7 @@ class StoreWidget extends StatelessWidget {
                                 color: isUnlocked ? Colors.green : Colors.amber,
                                 fontFamily: 'Fredoka',
                                 fontWeight: FontWeight.w600,
+                                fontSize: 11,
                               ),
                             ),
                           ],

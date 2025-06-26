@@ -100,7 +100,7 @@ class _ProgresoScreenState extends State<ProgresoScreen> {
                       "Mi Progreso :",
                       style: TextStyle(
                         color: Colors.amber,
-                        fontSize: 18,
+                        fontSize: 16,
                         fontFamily: 'Fredoka',
                         fontWeight: FontWeight.bold,
                       ),
