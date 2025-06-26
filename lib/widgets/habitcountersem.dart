@@ -43,7 +43,7 @@ class HabitCounterSem extends StatelessWidget {
                   style: TextStyle(
                     color: Colors.white,
                     fontFamily: 'Fredoka',
-                    fontSize: 14,
+                    fontSize: 13,
                   ),
                 ),
               ),
@@ -83,7 +83,7 @@ class HabitCounterSem extends StatelessWidget {
                 style: TextStyle(
                   color: Colors.white,
                   fontFamily: 'Fredoka',
-                  fontSize: 16,
+                  fontSize: 13,
                 ),
               ),
             ),

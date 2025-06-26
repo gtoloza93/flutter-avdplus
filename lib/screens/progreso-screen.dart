@@ -109,7 +109,7 @@ class _ProgresoScreenState extends State<ProgresoScreen> {
                 ),
               ),
 
-              SizedBox(height: 10),
+              SizedBox(height: 5),
 
               // 👇 LevelProgressWidget escucha automáticamente los cambios
               LevelProgressWidget(),
@@ -117,7 +117,7 @@ class _ProgresoScreenState extends State<ProgresoScreen> {
               // 👇 Progreso diario
               CustomProgressDia(),
 
-              SizedBox(height: 10),
+              SizedBox(height: 5),
 
               // 👇 Progreso semanal
               CustomProgressSem(),

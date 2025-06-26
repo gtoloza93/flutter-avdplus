@@ -265,17 +265,7 @@ class _LevelProgressWidgetState extends State<LevelProgressWidget> {
             ],
           ),
 
-          SizedBox(height: 4),
-
-          Text(
-            _bonusMessage,
-            style: TextStyle(
-              color: const Color.fromARGB(255, 255, 255, 255),
-              fontFamily: 'Fredoka',
-              fontSize: 14,
-            ),
-          ),
-        ],
+                 ],
       ),
     );
   }

@@ -191,7 +191,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                       child: Image.asset(
                         'assets/images/logo.png',
                         width:
-                           365, // Puedes cambiar esto para hacerlo más grande o pequeño
+                           350, // Puedes cambiar esto para hacerlo más grande o pequeño
 
                         fit: BoxFit.contain,
                       ),
@@ -203,14 +203,14 @@ class _RegisterScreenState extends State<RegisterScreen> {
                     Padding(
                       padding: EdgeInsets.only(
                         top: 0,
-                        left: 65,
+                        left: 75,
                       ), // Mueve el texto 20 píxeles a la izquierda
                       child: Text(
                         '¡Convierte el reto en diversión!',
                         textAlign: TextAlign.center,
                         style: TextStyle(
                           color: Colors.white,
-                          fontSize: 16,
+                          fontSize: 14,
                           fontFamily: 'Fredoka',
                           fontWeight: FontWeight.w500,
                         ),
@@ -312,7 +312,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                             25,
                           ),
                           padding: EdgeInsets.symmetric(
-                            horizontal: 115,
+                            horizontal: 112,
                             vertical: 5,
                           ),
                           shape: RoundedRectangleBorder(
@@ -388,7 +388,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                         ),
                       ),
                     ),
-                    SizedBox(height: 130),
+                    SizedBox(height: 75),
                     // Pie de página
                     Align(
                       alignment: Alignment.center,
@@ -397,7 +397,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                         style: TextStyle(
                           fontFamily: 'Fredoka',
                           color: Colors.black,
-                          fontSize: 18,
+                          fontSize: 14,
                         ),
                       ),
                     ),

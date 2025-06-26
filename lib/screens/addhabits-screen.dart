@@ -125,7 +125,7 @@ class _AddHabitScreenState extends State<AddHabitScreen> {
                               "Crear Hábito:",
                               style: TextStyle(
                                 color: Colors.amber,
-                                fontSize: 20,
+                                fontSize: 16,
                                 fontFamily: 'Fredoka',
                                 fontWeight: FontWeight.w600,
                               ),
@@ -144,9 +144,10 @@ class _AddHabitScreenState extends State<AddHabitScreen> {
                               Text(
                                 "Hoy",
                                 style: TextStyle(
-                                  color: Colors.white,
-                                  fontSize: 18,
+                                  color: Colors.amber,
+                                  fontSize: 14,
                                   fontFamily: 'Fredoka',
+                                  fontWeight: FontWeight.w600,
                                 ),
                               ),
                               SizedBox(
@@ -871,7 +872,7 @@ class _AddHabitScreenState extends State<AddHabitScreen> {
                           "Guardar",
                           style: TextStyle(
                             fontFamily: 'Fredoka',
-                            fontSize: 18,
+                            fontSize: 16,
                             fontWeight: FontWeight.bold,
                           ),
                         ),

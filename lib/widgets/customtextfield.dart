@@ -24,7 +24,7 @@ class CustomTextField extends StatelessWidget {
       padding: const EdgeInsets.only(left: 30.0, right: 30.0),
       child: SizedBox(
         
-        width: 380, // Ancho deseado
+        width: 360, // Ancho deseado
         child: TextFormField(
           controller: controller,
           obscureText: obscureText,
@@ -33,7 +33,7 @@ class CustomTextField extends StatelessWidget {
           style: TextStyle(
             color: Colors.white,
             fontFamily: 'Fredoka',
-            fontSize: 16,
+            fontSize: 14,
           ),
           decoration: InputDecoration(
             hintText: hintText,

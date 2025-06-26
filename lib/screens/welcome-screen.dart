@@ -33,7 +33,7 @@ class WelcomeScreen extends StatelessWidget {
                 child: Image.asset(
                   'assets/images/logo.png',
                   width:
-                      365, // Puedes cambiar esto para hacerlo más grande o pequeño
+                      350, // Puedes cambiar esto para hacerlo más grande o pequeño
 
                   fit: BoxFit.contain,
                 ),
@@ -44,21 +44,21 @@ class WelcomeScreen extends StatelessWidget {
               Padding(
                 padding: EdgeInsets.only(
                   top: 0,
-                  left: 65,
+                  left: 75,
                 ), // Mueve el texto 20 píxeles a la izquierda
                 child: Text(
                   '¡Convierte el reto en diversión!',
                   textAlign: TextAlign.center,
                   style: TextStyle(
                     color: Colors.white,
-                    fontSize: 16,
+                    fontSize: 14,
                     fontFamily: 'Fredoka',
                     fontWeight: FontWeight.w500,
                   ),
                 ),
               ),
 
-              SizedBox(height: 180), // Espacio antes de los botones
+              SizedBox(height: 150), // Espacio antes de los botones
               // Botón Registrarse
               Align(
                 alignment: Alignment.center, // Mueve el botón a la izquierda
@@ -72,7 +72,7 @@ class WelcomeScreen extends StatelessWidget {
                   style: ElevatedButton.styleFrom(
                     backgroundColor: Colors.amber[700],
                     foregroundColor: const Color.fromARGB(255, 163, 61, 25),
-                    padding: EdgeInsets.symmetric(vertical: 17, horizontal: 50),
+                    padding: EdgeInsets.symmetric(vertical: 15, horizontal: 48),
                     shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(10),
                     ),
@@ -80,7 +80,7 @@ class WelcomeScreen extends StatelessWidget {
                   child: Text(
                     "REGISTRARSE",
                     style: TextStyle(
-                      fontSize: 18,
+                      fontSize: 16,
                       fontWeight: FontWeight.w600,
                       fontFamily: 'Fredoka',
                     ),
@@ -88,7 +88,7 @@ class WelcomeScreen extends StatelessWidget {
                 ),
               ),
 
-              SizedBox(height: 20),
+              SizedBox(height: 10),
 
               // Botón Iniciar Sesión
               Align(
@@ -103,7 +103,7 @@ class WelcomeScreen extends StatelessWidget {
                   style: ElevatedButton.styleFrom(
                     backgroundColor: Colors.amber[700],
                     foregroundColor: const Color.fromARGB(255, 163, 61, 25),
-                    padding: EdgeInsets.symmetric(vertical: 17, horizontal: 42),
+                    padding: EdgeInsets.symmetric(vertical: 15, horizontal: 42),
                     shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(10),
                     ),
@@ -111,7 +111,7 @@ class WelcomeScreen extends StatelessWidget {
                   child: Text(
                     "INICIAR SESIÓN",
                     style: TextStyle(
-                      fontSize: 18,
+                      fontSize: 16,
                       fontWeight: FontWeight.bold,
                       fontFamily: 'Fredoka',
                     ),
@@ -119,7 +119,7 @@ class WelcomeScreen extends StatelessWidget {
                 ),
               ),
 
-              SizedBox(height: 230),
+              SizedBox(height: 225),
 
               // Pie de página
               Align(
@@ -129,7 +129,7 @@ class WelcomeScreen extends StatelessWidget {
                   style: TextStyle(
                     fontFamily: 'Fredoka',
                     color: Colors.black,
-                    fontSize: 18,
+                    fontSize: 14,
                   ),
                 ),
               ),

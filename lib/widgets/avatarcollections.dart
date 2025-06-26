@@ -219,8 +219,8 @@ class _AvatarCollectionsState extends State<AvatarCollections> {
                       duration: Duration(milliseconds: 300),
                       child: Container(
                         key: ValueKey<String>(selectedAvatar),
-                        width: 140,
-                        height: 140,
+                        width: 115,
+                        height: 115,
                         decoration: BoxDecoration(
                           color: selectedAvatarColor, // Usamos el color guardado
                           borderRadius: BorderRadius.circular(12),
@@ -254,9 +254,9 @@ class _AvatarCollectionsState extends State<AvatarCollections> {
                         fontWeight: FontWeight.bold,
                       ),
                     ),
-                    SizedBox(height: 5),
+                    SizedBox(height: 3),
                     SizedBox(
-                      height: 75,
+                      height: 70,
                       child: Column(
                         children: [
                           Expanded(
@@ -284,8 +284,8 @@ class _AvatarCollectionsState extends State<AvatarCollections> {
                                         await _saveAvatar(newAvatar, newColor);
                                       },
                                       child: Container(
-                                        width: 75,
-                                        height: 75,
+                                        width: 70,
+                                        height: 70,
                                         margin: EdgeInsets.symmetric(
                                           horizontal: 5,
                                         ),

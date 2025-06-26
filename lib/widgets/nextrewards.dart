@@ -65,7 +65,7 @@ class NextRewards extends StatelessWidget {
         final rewards = _getRewardsToShow(currentLevel);
 
         return Container(
-          height: 170,
+          height: 140,
           padding: const EdgeInsets.all(10),
           margin: const EdgeInsets.symmetric(horizontal: 0, vertical: 5),
           decoration: BoxDecoration(
